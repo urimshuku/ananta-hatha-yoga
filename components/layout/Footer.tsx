@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { FooterCertificationLogo } from "@/components/layout/FooterCertificationLogo";
 import { Container } from "@/components/layout/Container";
 import {
   LEGAL_LINKS,
@@ -22,10 +23,13 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
   return (
     <footer className="border-t border-border bg-ivory">
       <Container className="py-section-sm">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div className="max-w-sm">
-            <p className="font-heading text-2xl text-charcoal">{brand}</p>
-            <p className="mt-3 text-sm leading-relaxed text-brown">{tagline}</p>
+        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr] md:items-stretch">
+          <div className="flex max-w-sm flex-col">
+            <div>
+              <p className="font-heading text-2xl text-charcoal">{brand}</p>
+              <p className="mt-3 text-sm leading-relaxed text-brown">{tagline}</p>
+            </div>
+            <FooterCertificationLogo className="mt-8 md:mt-auto md:pt-10" />
           </div>
 
           <div>

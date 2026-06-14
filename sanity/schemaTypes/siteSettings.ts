@@ -34,12 +34,6 @@ export const siteSettings = defineType({
       description: "Used as a default description across the site and for SEO.",
     }),
     defineField({
-      name: "logo",
-      title: "Logo",
-      type: "imageWithAlt",
-      group: "brand",
-    }),
-    defineField({
       name: "email",
       title: "Email",
       type: "string",

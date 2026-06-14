@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -8,9 +7,9 @@ import { CMSRichText } from "@/components/content/CMSRichText";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
+import { LocalProgramImage } from "@/components/ui/LocalProgramImage";
+import { LocalProgramSymbol } from "@/components/ui/LocalProgramSymbol";
 import { Ornament } from "@/components/ui/Ornament";
-import { SanityImage } from "@/components/ui/SanityImage";
-import { urlForImage } from "@/sanity/lib/image";
 import { buildMetadata } from "@/lib/seo";
 import {
   getProgramBySlug,
@@ -51,8 +50,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     getUpcomingEventsByProgram(program.slug),
   ]);
 
-  const symbolUrl = urlForImage(program.symbol)?.width(120).height(120).url();
-
   return (
     <>
       <section className="bg-ivory pt-32 pb-section-sm sm:pt-40 border-b border-border">
@@ -64,18 +61,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
             >
               &larr; All programs
             </Link>
-            {symbolUrl ? (
-              <Image
-                src={symbolUrl}
-                alt=""
-                aria-hidden="true"
-                width={120}
-                height={120}
-                className="mx-auto mb-6 h-16 w-16 object-contain opacity-90"
-              />
-            ) : (
-              <p className="eyebrow mb-5">Program</p>
-            )}
+            <LocalProgramSymbol slug={program.slug} />
             <h1 className="text-display text-balance">{program.title}</h1>
             {program.shortIntro ? (
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brown">
@@ -134,8 +120,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="overflow-hidden rounded-xl border border-border bg-ivory shadow-soft">
                 <div className="aspect-[4/5]">
-                  <SanityImage
-                    image={program.image}
+                  <LocalProgramImage
+                    slug={program.slug}
                     alt={program.title}
                     width={600}
                     height={750}

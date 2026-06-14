@@ -6,7 +6,6 @@ export const program = defineType({
   type: "document",
   groups: [
     { name: "content", title: "Content", default: true },
-    { name: "media", title: "Media" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
@@ -74,19 +73,6 @@ export const program = defineType({
       of: [{ type: "string" }],
     }),
     defineField({
-      name: "image",
-      title: "Image",
-      type: "imageWithAlt",
-      group: "media",
-    }),
-    defineField({
-      name: "symbol",
-      title: "Abstract symbol",
-      type: "imageWithAlt",
-      group: "media",
-      description: "Optional decorative symbol associated with this program.",
-    }),
-    defineField({
       name: "seo",
       title: "SEO",
       type: "seo",
@@ -106,11 +92,10 @@ export const program = defineType({
     },
   ],
   preview: {
-    select: { title: "title", subtitle: "shortIntro", media: "image", published: "published" },
-    prepare: ({ title, subtitle, media, published }) => ({
+    select: { title: "title", subtitle: "shortIntro", published: "published" },
+    prepare: ({ title, subtitle, published }) => ({
       title,
       subtitle: published ? subtitle : `(hidden) ${subtitle ?? ""}`,
-      media,
     }),
   },
 });

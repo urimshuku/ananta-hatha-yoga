@@ -13,7 +13,6 @@ export const siteSettingsQuery = groq`
     whatsapp,
     location,
     social[]{ label, url },
-    logo${imageFields},
     ${seoFields}
   }
 `;
@@ -32,8 +31,7 @@ export const homePageQuery = groq`
       _id,
       title,
       "slug": slug.current,
-      shortIntro,
-      image${imageFields}
+      shortIntro
     },
     privateCorporate{ heading, body },
     aboutIntro{ eyebrow, heading, body, image${imageFields} },
@@ -60,8 +58,7 @@ export const programsQuery = groq`
     _id,
     title,
     "slug": slug.current,
-    shortIntro,
-    image${imageFields}
+    shortIntro
   }
 `;
 
@@ -70,8 +67,7 @@ export const featuredProgramsFallbackQuery = groq`
     _id,
     title,
     "slug": slug.current,
-    shortIntro,
-    image${imageFields}
+    shortIntro
   }
 `;
 
@@ -88,8 +84,6 @@ export const programBySlugQuery = groq`
     body,
     benefits,
     experiences,
-    image${imageFields},
-    symbol${imageFields},
     ${seoFields}
   }
 `;

@@ -22,7 +22,6 @@ export interface SiteSettings {
   whatsapp?: string;
   location?: string;
   social?: { label?: string; url?: string }[];
-  logo?: SanityImage;
   seo?: SeoFields;
 }
 
@@ -31,14 +30,12 @@ export interface ProgramListItem {
   title: string;
   slug: string;
   shortIntro?: string;
-  image?: SanityImage;
 }
 
 export interface Program extends ProgramListItem {
   body?: PortableTextBlock[];
   benefits?: string[];
   experiences?: string[];
-  symbol?: SanityImage;
   seo?: SeoFields;
 }
 

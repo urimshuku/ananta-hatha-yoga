@@ -247,7 +247,7 @@ docs.push({
   _id: "siteSettings",
   _type: "siteSettings",
   brandName: "Ananta Hatha Yoga",
-  tagline: "Classical Hatha Yoga, taught in its original form.",
+  tagline: "Above all, balance.",
   description:
     "Ananta Hatha Yoga offers Classical Hatha Yoga in Saranda, Albania — practices taught in their traditional form to support clarity, balance, and inner stability. Classes are in-person.",
   email: "hello@anantahathayoga.com",

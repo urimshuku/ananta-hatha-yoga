@@ -5,7 +5,15 @@
  */
 
 export const SITE_NAME = "Ananta Hatha Yoga";
-export const SITE_TAGLINE = "Classical Hatha Yoga, taught in its original form.";
+export const SITE_TAGLINE = "Above all, balance.";
+
+/** Footer certification badge (local file only). */
+export const FOOTER_CERTIFICATION_LOGO = {
+  src: "/images/certified-teacher-logo.avif",
+  alt: "Isha Hatha Yoga Certified Teacher",
+  width: 512,
+  height: 135,
+} as const;
 export const SITE_DESCRIPTION =
   "Ananta Hatha Yoga offers Classical Hatha Yoga in Saranda, Albania — practices taught in their traditional form to support clarity, balance, and inner stability. Classes are in-person.";
 
