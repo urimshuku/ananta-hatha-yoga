@@ -38,6 +38,7 @@ export interface Program extends ProgramListItem {
   benefits?: string[];
   practiceIndependently?: PortableTextBlock[];
   privateAndGroupSessions?: PortableTextBlock[];
+  videoUrl?: string;
   seo?: SeoFields;
 }
 

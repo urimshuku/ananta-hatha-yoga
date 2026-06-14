@@ -88,6 +88,13 @@ export const program = defineType({
       description: "How this practice is offered in group and private settings.",
     }),
     defineField({
+      name: "videoUrl",
+      title: "Video URL",
+      type: "url",
+      group: "content",
+      description: "Optional YouTube link shown at the bottom of the program page.",
+    }),
+    defineField({
       name: "seo",
       title: "SEO",
       type: "seo",

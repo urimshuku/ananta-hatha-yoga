@@ -44,6 +44,7 @@ interface ProgramSeed {
   benefits: string[];
   practiceIndependently: string[];
   privateAndGroupSessions: string[];
+  videoUrl?: string;
 }
 
 function defaultPracticeIndependently(title: string): string[] {
@@ -64,12 +65,14 @@ export const programSeeds: ProgramSeed[] = [
     title: "Angamardana",
     slug: "angamardana",
     shortIntro:
-      "A full-body practice rooted in the yogic system, designed to support strength, stamina, and vitality without external weights.",
+      "The word “Angamardana” means to have mastery over your limbs or body parts. Whatever action you want to perform in this world, how much mastery you have over your limbs determines how well you are going to do it.",
     whatIs: [
-      "Angamardana is a practice that works with the body in a structured, rhythmic way. The name points to the idea of gaining mastery over the limbs and the whole physical system through dedicated effort.",
+      "Angamardana is a series of 31 processes to invigorate the body, and reach peak physical fitness and mental health.",
+      "A series of 31 dynamic processes, rooted in yoga, to invigorate the body and reach peak physical fitness. Angamardana means gaining complete mastery over the limbs, organs and other parts of the body. It needs no fitness equipment.",
     ],
     aboutThePractice: [
-      "Practised in its traditional form, Angamardana is designed to support physical strength, flexibility, and endurance while also bringing a sense of steadiness to the mind. It is a complete practice that uses only the body itself.",
+      "Angamardana, a fitness system rooted in yoga, offers everyone the opportunity to invigorate the body and reach peak physical and mental health.",
+      "“Angamardana” means gaining complete mastery over the limbs, organs, and other parts of the body. True to its name, this practice revitalizes the body on all levels including the muscles, circulatory system, skeletal structure, nervous system, and the basic energy system.",
     ],
     benefits: [
       "May support overall strength and stamina",
@@ -78,6 +81,7 @@ export const programSeeds: ProgramSeed[] = [
     ],
     practiceIndependently: defaultPracticeIndependently("Angamardana"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Angamardana"),
+    videoUrl: "https://youtu.be/9aAzFTQOJJU",
   },
   {
     title: "Bhastrika Kriya",
@@ -291,6 +295,7 @@ export function placeholderProgramBySlug(slug: string): Program | undefined {
     benefits: p.benefits,
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
+    videoUrl: p.videoUrl,
   };
 }
 

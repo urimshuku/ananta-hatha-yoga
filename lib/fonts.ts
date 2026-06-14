@@ -4,6 +4,7 @@ export const fontHeading = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-heading",
 });
 

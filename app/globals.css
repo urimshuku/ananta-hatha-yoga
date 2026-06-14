@@ -47,6 +47,11 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .hero-subtitle {
+    @apply mx-auto max-w-2xl font-heading text-xl italic leading-relaxed text-brown sm:text-2xl;
+    font-weight: 400;
+  }
 }
 
 @layer utilities {

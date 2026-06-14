@@ -41,10 +41,18 @@ const programs = [
     title: "Angamardana",
     slug: "angamardana",
     shortIntro:
-      "A full-body practice rooted in the yogic system, designed to support strength, stamina, and vitality without external weights.",
+      "The word “Angamardana” means to have mastery over your limbs or body parts. Whatever action you want to perform in this world, how much mastery you have over your limbs determines how well you are going to do it.",
+    whatIs: [
+      "Angamardana is a series of 31 processes to invigorate the body, and reach peak physical fitness and mental health.",
+      "A series of 31 dynamic processes, rooted in yoga, to invigorate the body and reach peak physical fitness. Angamardana means gaining complete mastery over the limbs, organs and other parts of the body. It needs no fitness equipment.",
+    ],
+    aboutThePractice: [
+      "Angamardana, a fitness system rooted in yoga, offers everyone the opportunity to invigorate the body and reach peak physical and mental health.",
+      "“Angamardana” means gaining complete mastery over the limbs, organs, and other parts of the body. True to its name, this practice revitalizes the body on all levels including the muscles, circulatory system, skeletal structure, nervous system, and the basic energy system.",
+    ],
     body: [
-      "Angamardana is a practice that works with the body in a structured, rhythmic way. The name points to gaining mastery over the limbs and the whole physical system through dedicated effort.",
-      "Practised in its traditional form, Angamardana is designed to support physical strength, flexibility, and endurance while bringing steadiness to the mind. It is a complete practice that uses only the body itself.",
+      "Angamardana is a series of 31 processes to invigorate the body, and reach peak physical fitness and mental health.",
+      "Angamardana, a fitness system rooted in yoga, offers everyone the opportunity to invigorate the body and reach peak physical and mental health.",
     ],
     benefits: [
       "May support overall strength and stamina",
@@ -55,6 +63,7 @@ const programs = [
       "A sense of physical lightness and vitality",
       "Steadiness and focus that can carry into daily life",
     ],
+    videoUrl: "https://youtu.be/9aAzFTQOJJU",
   },
   {
     title: "Bhastrika Kriya",
@@ -245,11 +254,12 @@ const programDocs = programs.map((p) => ({
   title: p.title,
   slug: p.slug,
   shortIntro: p.shortIntro,
-  whatIs: [p.body[0]],
-  aboutThePractice: [p.body[1]],
+  whatIs: p.whatIs ?? [p.body[0]],
+  aboutThePractice: p.aboutThePractice ?? [p.body[1]],
   benefits: p.benefits,
   practiceIndependently: defaultPracticeIndependently(p.title),
   privateAndGroupSessions: defaultPrivateAndGroupSessions(p.title),
+  videoUrl: p.videoUrl,
 }));
 
 programDocs.forEach((p, i) => {
@@ -266,6 +276,7 @@ programDocs.forEach((p, i) => {
     benefits: p.benefits,
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
+    ...(p.videoUrl ? { videoUrl: p.videoUrl } : {}),
   });
 });
 

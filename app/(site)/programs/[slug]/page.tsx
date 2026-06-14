@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 
 import { EventCard } from "@/components/cards/EventCard";
 import { CMSRichText } from "@/components/content/CMSRichText";
+import { YouTubeEmbed } from "@/components/content/YouTubeEmbed";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +14,7 @@ import { LocalProgramImage } from "@/components/ui/LocalProgramImage";
 import { LocalProgramSymbol } from "@/components/ui/LocalProgramSymbol";
 import { Ornament } from "@/components/ui/Ornament";
 import { buildMetadata } from "@/lib/seo";
+import { getYouTubeVideoId } from "@/lib/youtube";
 import {
   getProgramBySlug,
   getProgramSlugs,
@@ -73,6 +75,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     getUpcomingEventsByProgram(program.slug),
   ]);
 
+  const videoId = program.videoUrl ? getYouTubeVideoId(program.videoUrl) : null;
+
   return (
     <>
       <section className="bg-ivory pt-32 pb-section-sm sm:pt-40 border-b border-border">
@@ -87,9 +91,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
             <LocalProgramSymbol slug={program.slug} />
             <h1 className="text-display text-balance">{program.title}</h1>
             {program.shortIntro ? (
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brown">
-                {program.shortIntro}
-              </p>
+              <p className="hero-subtitle mt-6">{program.shortIntro}</p>
             ) : null}
           </div>
         </Container>
@@ -209,6 +211,19 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                   whatsappNumber={settings.whatsapp}
                 />
               ))}
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
+      {videoId ? (
+        <Section
+          tone={relatedEvents.length > 0 ? "cream" : "ivory"}
+          className="border-t border-border"
+        >
+          <Container>
+            <div className="mx-auto max-w-4xl">
+              <YouTubeEmbed videoId={videoId} title={`${program.title} video`} />
             </div>
           </Container>
         </Section>

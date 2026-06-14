@@ -86,6 +86,7 @@ export const programBySlugQuery = groq`
     benefits,
     practiceIndependently,
     privateAndGroupSessions,
+    videoUrl,
     ${seoFields}
   }
 `;
