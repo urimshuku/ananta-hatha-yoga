@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { programImageSrc } from "@/lib/local-images";
+import { programImageObjectPositionClass, programImageSrc } from "@/lib/local-images";
 import { cn } from "@/lib/utils";
 
 type LocalProgramImageProps = {
@@ -41,7 +41,7 @@ export function LocalProgramImage({
       height={height}
       sizes={sizes}
       priority={priority}
-      className={className}
+      className={cn(programImageObjectPositionClass(slug), className)}
     />
   );
 }

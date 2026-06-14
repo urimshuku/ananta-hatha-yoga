@@ -75,10 +75,10 @@ export const program = defineType({
     }),
     defineField({
       name: "practiceIndependently",
-      title: "Practice Independently",
+      title: "After the Program",
       type: "blockContent",
       group: "content",
-      description: "Guidance on learning and continuing the practice on one's own.",
+      description: "Guidance on continuing the practice at home after completing the program.",
     }),
     defineField({
       name: "privateAndGroupSessions",
@@ -92,7 +92,14 @@ export const program = defineType({
       title: "Video URL",
       type: "url",
       group: "content",
-      description: "Optional YouTube link shown at the bottom of the program page.",
+      description: "Optional YouTube link shown in the program sidebar.",
+    }),
+    defineField({
+      name: "priceLabel",
+      title: "Price",
+      type: "string",
+      group: "content",
+      description: "Shown in the sidebar, e.g. “300€” or “Contact for details”.",
     }),
     defineField({
       name: "seo",

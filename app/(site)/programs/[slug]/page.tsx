@@ -5,8 +5,8 @@ import type { PortableTextBlock } from "@portabletext/types";
 import type { ReactNode } from "react";
 
 import { EventCard } from "@/components/cards/EventCard";
+import { ProgramWatchButton } from "@/components/content/ProgramYouTubeSection";
 import { CMSRichText } from "@/components/content/CMSRichText";
-import { YouTubeEmbed } from "@/components/content/YouTubeEmbed";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
@@ -14,7 +14,16 @@ import { LocalProgramImage } from "@/components/ui/LocalProgramImage";
 import { LocalProgramSymbol } from "@/components/ui/LocalProgramSymbol";
 import { Ornament } from "@/components/ui/Ornament";
 import { buildMetadata } from "@/lib/seo";
-import { getYouTubeVideoId } from "@/lib/youtube";
+import {
+  PROGRAM_AFTER_PROGRAM_TITLE,
+  PROGRAM_BEFORE_PROGRAM_TITLE,
+  PROGRAM_MEDICAL_NOTICE,
+  PROGRAM_MEDICAL_NOTICE_TITLE,
+  getBeforeProgramNotes,
+  getProgramVideoLink,
+  programAfterProgramText,
+  programSidebarCtaText,
+} from "@/lib/constants";
 import {
   getProgramBySlug,
   getProgramSlugs,
@@ -75,7 +84,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     getUpcomingEventsByProgram(program.slug),
   ]);
 
-  const videoId = program.videoUrl ? getYouTubeVideoId(program.videoUrl) : null;
+  const videoLink = program.videoUrl ? getProgramVideoLink(program.slug, program.title) : null;
 
   return (
     <>
@@ -137,51 +146,70 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                 </ProgramSection>
               ) : null}
 
-              {hasRichText(program.practiceIndependently) ? (
-                <ProgramSection
-                  title="Practice Independently"
-                  first={
-                    !hasRichText(program.whatIs) &&
-                    !hasRichText(program.aboutThePractice) &&
-                    !(program.benefits && program.benefits.length > 0)
-                  }
-                >
-                  <CMSRichText value={program.practiceIndependently} />
-                </ProgramSection>
-              ) : null}
+              <ProgramSection
+                title={PROGRAM_BEFORE_PROGRAM_TITLE}
+                first={
+                  !hasRichText(program.whatIs) &&
+                  !hasRichText(program.aboutThePractice) &&
+                  !(program.benefits && program.benefits.length > 0)
+                }
+              >
+                <div className="space-y-4 leading-relaxed text-[#3a322a]">
+                  {getBeforeProgramNotes(program.slug).map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
+                </div>
+              </ProgramSection>
 
-              {hasRichText(program.privateAndGroupSessions) ? (
-                <ProgramSection
-                  title="Private and Group Sessions"
-                  first={
-                    !hasRichText(program.whatIs) &&
-                    !hasRichText(program.aboutThePractice) &&
-                    !(program.benefits && program.benefits.length > 0) &&
-                    !hasRichText(program.practiceIndependently)
-                  }
-                >
-                  <CMSRichText value={program.privateAndGroupSessions} />
-                </ProgramSection>
-              ) : null}
+              <ProgramSection title={PROGRAM_AFTER_PROGRAM_TITLE}>
+                <div className="space-y-4 leading-relaxed text-[#3a322a]">
+                  {programAfterProgramText(program.title).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </ProgramSection>
+
+              <div className="mt-12 border-t border-border pt-10">
+                <div className="rounded-2xl border border-border bg-ivory p-6 shadow-soft sm:p-8">
+                  <h2 className="font-heading text-2xl text-charcoal">{PROGRAM_MEDICAL_NOTICE_TITLE}</h2>
+                  <p className="mt-4 leading-relaxed text-[#3a322a]">{PROGRAM_MEDICAL_NOTICE}</p>
+                </div>
+              </div>
             </div>
 
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="overflow-hidden rounded-xl border border-border bg-ivory shadow-soft">
-                <div className="aspect-[4/5]">
+                <div className="aspect-[9/10]">
                   <LocalProgramImage
                     slug={program.slug}
                     alt={program.title}
-                    width={600}
-                    height={750}
+                    width={540}
+                    height={600}
                     sizes="(max-width: 1024px) 100vw, 33vw"
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="space-y-3 p-6">
-                  <p className="text-sm leading-relaxed text-brown">
-                    Interested in this practice? View upcoming sessions or get in touch to
-                    register your interest.
-                  </p>
+                {program.videoUrl && videoLink ? (
+                  <ProgramWatchButton
+                    href={program.videoUrl}
+                    ariaLabel={`Watch: ${videoLink.title}`}
+                  />
+                ) : null}
+                {program.priceLabel ? (
+                  <div className="flex h-14 items-center justify-center border-b border-border px-6">
+                    <p className="text-sm text-charcoal">
+                      <span className="text-brown">Price:</span>{" "}
+                      <span className="font-heading text-xl leading-none">{program.priceLabel}</span>
+                    </p>
+                  </div>
+                ) : null}
+                <div className="space-y-4 p-6">
+                  {programSidebarCtaText(program.title).map((paragraph) => (
+                    <p key={paragraph} className="text-sm leading-relaxed text-brown">
+                      {paragraph}
+                    </p>
+                  ))}
+
                   <Button href="/events" className="w-full">
                     View upcoming events
                   </Button>
@@ -211,19 +239,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                   whatsappNumber={settings.whatsapp}
                 />
               ))}
-            </div>
-          </Container>
-        </Section>
-      ) : null}
-
-      {videoId ? (
-        <Section
-          tone={relatedEvents.length > 0 ? "cream" : "ivory"}
-          className="border-t border-border"
-        >
-          <Container>
-            <div className="mx-auto max-w-4xl">
-              <YouTubeEmbed videoId={videoId} title={`${program.title} video`} />
             </div>
           </Container>
         </Section>

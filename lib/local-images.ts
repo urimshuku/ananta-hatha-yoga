@@ -30,6 +30,15 @@ export function programImageSrc(slug: string): string | null {
   return resolveLocalImageSrc(["programs"], slug);
 }
 
+/** Crop anchor for object-cover program photos (Tailwind object-position utilities). */
+const PROGRAM_IMAGE_OBJECT_POSITION: Partial<Record<string, string>> = {
+  angamardana: "object-[95%_center]",
+};
+
+export function programImageObjectPositionClass(slug: string): string {
+  return PROGRAM_IMAGE_OBJECT_POSITION[slug] ?? "object-center";
+}
+
 export function programSymbolSrc(slug: string): string | null {
   return resolveLocalImageSrc(["programs"], `${slug}-symbol`);
 }

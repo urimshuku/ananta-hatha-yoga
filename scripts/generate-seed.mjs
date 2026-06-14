@@ -25,7 +25,8 @@ function blocks(...paragraphs) {
 
 function defaultPracticeIndependently(title) {
   return [
-    `Once learnt under proper guidance, ${title} can be practised independently at home. Regular, consistent practice helps deepen the benefits and integrate the practice into daily life.`,
+    `${title} can be practised independently at home. Regular, consistent practice helps deepen the benefits and integrate the practice into daily life.`,
+    "Also, 40 days of practice support is available after the program.",
   ];
 }
 
@@ -55,15 +56,19 @@ const programs = [
       "Angamardana, a fitness system rooted in yoga, offers everyone the opportunity to invigorate the body and reach peak physical and mental health.",
     ],
     benefits: [
-      "May support overall strength and stamina",
-      "Can help create greater flexibility and ease of movement",
-      "Is designed to support a more energetic and stable system",
+      "Strengthens the spine, skeletal and muscular system",
+      "Builds physical strength, fitness and tenacity",
+      "Invigorates the body, bringing a sense of lightness and freedom in the body",
+      "Prepares the body for Hatha Yoga",
+      "Revitalizes the body including the muscles, blood circulation, skeletal and nervous systems",
+      "Helps in weight-loss",
     ],
     experiences: [
       "A sense of physical lightness and vitality",
       "Steadiness and focus that can carry into daily life",
     ],
     videoUrl: "https://youtu.be/9aAzFTQOJJU",
+    priceLabel: "300€",
   },
   {
     title: "Bhastrika Kriya",
@@ -260,6 +265,7 @@ const programDocs = programs.map((p) => ({
   practiceIndependently: defaultPracticeIndependently(p.title),
   privateAndGroupSessions: defaultPrivateAndGroupSessions(p.title),
   videoUrl: p.videoUrl,
+  priceLabel: p.priceLabel,
 }));
 
 programDocs.forEach((p, i) => {
@@ -277,6 +283,7 @@ programDocs.forEach((p, i) => {
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
     ...(p.videoUrl ? { videoUrl: p.videoUrl } : {}),
+    ...(p.priceLabel ? { priceLabel: p.priceLabel } : {}),
   });
 });
 

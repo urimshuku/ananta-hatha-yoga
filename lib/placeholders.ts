@@ -11,7 +11,7 @@ import type {
   SiteSettings,
   YogaEvent,
 } from "@/sanity/lib/types";
-import { CONTACT, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { CONTACT, programAfterProgramText, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
 /** Build a minimal Portable Text block from plain paragraphs. */
 export function blocks(...paragraphs: string[]): PortableTextBlock[] {
@@ -45,12 +45,11 @@ interface ProgramSeed {
   practiceIndependently: string[];
   privateAndGroupSessions: string[];
   videoUrl?: string;
+  priceLabel?: string;
 }
 
-function defaultPracticeIndependently(title: string): string[] {
-  return [
-    `Once learnt under proper guidance, ${title} can be practised independently at home. Regular, consistent practice helps deepen the benefits and integrate the practice into daily life.`,
-  ];
+function defaultAfterProgramText(title: string): string[] {
+  return [...programAfterProgramText(title)];
 }
 
 function defaultPrivateAndGroupSessions(title: string): string[] {
@@ -75,13 +74,17 @@ export const programSeeds: ProgramSeed[] = [
       "“Angamardana” means gaining complete mastery over the limbs, organs, and other parts of the body. True to its name, this practice revitalizes the body on all levels including the muscles, circulatory system, skeletal structure, nervous system, and the basic energy system.",
     ],
     benefits: [
-      "May support overall strength and stamina",
-      "Can help create greater flexibility and ease of movement",
-      "Is designed to support a more energetic and stable system",
+      "Strengthens the spine, skeletal and muscular system",
+      "Builds physical strength, fitness and tenacity",
+      "Invigorates the body, bringing a sense of lightness and freedom in the body",
+      "Prepares the body for Hatha Yoga",
+      "Revitalizes the body including the muscles, blood circulation, skeletal and nervous systems",
+      "Helps in weight-loss",
     ],
-    practiceIndependently: defaultPracticeIndependently("Angamardana"),
+    practiceIndependently: defaultAfterProgramText("Angamardana"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Angamardana"),
     videoUrl: "https://youtu.be/9aAzFTQOJJU",
+    priceLabel: "300€",
   },
   {
     title: "Bhastrika Kriya",
@@ -99,7 +102,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create greater awareness of the breath",
       "Is designed to support inner clarity",
     ],
-    practiceIndependently: defaultPracticeIndependently("Bhastrika Kriya"),
+    practiceIndependently: defaultAfterProgramText("Bhastrika Kriya"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Bhastrika Kriya"),
   },
   {
@@ -118,7 +121,7 @@ export const programSeeds: ProgramSeed[] = [
       "May help bring a sense of inner cleanliness",
       "Can help create a stable foundation for further practice",
     ],
-    practiceIndependently: defaultPracticeIndependently("Bhuta Shuddhi"),
+    practiceIndependently: defaultAfterProgramText("Bhuta Shuddhi"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Bhuta Shuddhi"),
   },
   {
@@ -137,7 +140,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a habit of mindful care",
       "Is designed to support overall ease",
     ],
-    practiceIndependently: defaultPracticeIndependently("Eye Care Practices"),
+    practiceIndependently: defaultAfterProgramText("Eye Care Practices"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Eye Care Practices"),
   },
   {
@@ -156,7 +159,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a sense of freshness",
       "Is designed to support nasal comfort",
     ],
-    practiceIndependently: defaultPracticeIndependently("Jala Neti"),
+    practiceIndependently: defaultAfterProgramText("Jala Neti"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Jala Neti"),
   },
   {
@@ -175,7 +178,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a sense of lightness",
       "Is designed to support gentle release of tension",
     ],
-    practiceIndependently: defaultPracticeIndependently("Pavanamuktasana"),
+    practiceIndependently: defaultAfterProgramText("Pavanamuktasana"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Pavanamuktasana"),
   },
   {
@@ -194,7 +197,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a settled state of mind",
       "Is designed to support inner stillness",
     ],
-    practiceIndependently: defaultPracticeIndependently("Shanmukhi Mudra"),
+    practiceIndependently: defaultAfterProgramText("Shanmukhi Mudra"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Shanmukhi Mudra"),
   },
   {
@@ -213,7 +216,7 @@ export const programSeeds: ProgramSeed[] = [
       "May support steadiness and vitality",
       "Can help create a stable inner foundation",
     ],
-    practiceIndependently: defaultPracticeIndependently("Surya Kriya"),
+    practiceIndependently: defaultAfterProgramText("Surya Kriya"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Surya Kriya"),
   },
   {
@@ -232,7 +235,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create greater energy",
       "Is designed to support an active, stable system",
     ],
-    practiceIndependently: defaultPracticeIndependently("Surya Shakti"),
+    practiceIndependently: defaultAfterProgramText("Surya Shakti"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Surya Shakti"),
   },
   {
@@ -251,7 +254,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create balance between body and breath",
       "Is designed to support steadiness",
     ],
-    practiceIndependently: defaultPracticeIndependently("Thoppukarnam"),
+    practiceIndependently: defaultAfterProgramText("Thoppukarnam"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Thoppukarnam"),
   },
   {
@@ -270,7 +273,7 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create stability and ease",
       "Is designed to support a balanced flow of energy",
     ],
-    practiceIndependently: defaultPracticeIndependently("Yogasanas"),
+    practiceIndependently: defaultAfterProgramText("Yogasanas"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Yogasanas"),
   },
 ];
@@ -296,6 +299,7 @@ export function placeholderProgramBySlug(slug: string): Program | undefined {
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
     videoUrl: p.videoUrl,
+    priceLabel: p.priceLabel,
   };
 }
 

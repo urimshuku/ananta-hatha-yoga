@@ -87,6 +87,7 @@ export const programBySlugQuery = groq`
     practiceIndependently,
     privateAndGroupSessions,
     videoUrl,
+    priceLabel,
     ${seoFields}
   }
 `;
