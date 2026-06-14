@@ -105,3 +105,16 @@ export function getProgramVideoLink(slug: string, programTitle: string) {
     }
   );
 }
+
+export const PROGRAM_DEFAULT_PRICE_LABEL = "Contact for details";
+
+const PROGRAM_PRICE_LABELS: Record<string, string> = {
+  angamardana: "300€",
+  "bhastrika-kriya": "55€",
+  "bhuta-shuddhi": "175€",
+};
+
+export function getProgramPriceLabel(slug: string, priceLabel?: string | null): string {
+  if (priceLabel?.trim()) return priceLabel.trim();
+  return PROGRAM_PRICE_LABELS[slug] ?? PROGRAM_DEFAULT_PRICE_LABEL;
+}

@@ -37,6 +37,17 @@ function defaultPrivateAndGroupSessions(title) {
   ];
 }
 
+const PROGRAM_PRICE_LABELS = {
+  angamardana: "300€",
+  "bhastrika-kriya": "55€",
+  "bhuta-shuddhi": "175€",
+};
+
+function programPriceLabel(slug, priceLabel) {
+  if (priceLabel?.trim()) return priceLabel.trim();
+  return PROGRAM_PRICE_LABELS[slug] ?? "Contact for details";
+}
+
 const programs = [
   {
     title: "Angamardana",
@@ -93,6 +104,7 @@ const programs = [
       "A feeling of openness in the chest and breath",
       "Calm alertness after practice",
     ],
+    priceLabel: "55€",
   },
   {
     title: "Bhuta Shuddhi",
@@ -291,7 +303,7 @@ programDocs.forEach((p, i) => {
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
     ...(p.videoUrl ? { videoUrl: p.videoUrl } : {}),
-    ...(p.priceLabel ? { priceLabel: p.priceLabel } : {}),
+    priceLabel: programPriceLabel(p.slug, p.priceLabel),
   });
 });
 

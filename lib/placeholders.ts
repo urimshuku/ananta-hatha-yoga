@@ -11,7 +11,7 @@ import type {
   SiteSettings,
   YogaEvent,
 } from "@/sanity/lib/types";
-import { CONTACT, programAfterProgramText, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { CONTACT, getProgramPriceLabel, programAfterProgramText, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
 /** Build a minimal Portable Text block from plain paragraphs. */
 export function blocks(...paragraphs: string[]): PortableTextBlock[] {
@@ -107,6 +107,7 @@ export const programSeeds: ProgramSeed[] = [
     ],
     practiceIndependently: defaultAfterProgramText("Bhastrika Kriya"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Bhastrika Kriya"),
+    priceLabel: "55€",
   },
   {
     title: "Bhuta Shuddhi",
@@ -305,7 +306,7 @@ export function placeholderProgramBySlug(slug: string): Program | undefined {
     practiceIndependently: blocks(...p.practiceIndependently),
     privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
     videoUrl: p.videoUrl,
-    priceLabel: p.priceLabel,
+    priceLabel: getProgramPriceLabel(p.slug, p.priceLabel),
   };
 }
 

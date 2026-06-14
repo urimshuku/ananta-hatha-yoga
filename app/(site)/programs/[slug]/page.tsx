@@ -21,6 +21,7 @@ import {
   PROGRAM_MEDICAL_NOTICE,
   PROGRAM_MEDICAL_NOTICE_TITLE,
   getBeforeProgramNotes,
+  getProgramPriceLabel,
   getProgramVideoLink,
   programAfterProgramText,
   programSidebarCtaText,
@@ -87,6 +88,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
   ]);
 
   const videoLink = program.videoUrl ? getProgramVideoLink(program.slug, program.title) : null;
+  const priceLabel = getProgramPriceLabel(program.slug, program.priceLabel);
 
   return (
     <>
@@ -194,14 +196,12 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                     ariaLabel={`Watch: ${videoLink.title}`}
                   />
                 ) : null}
-                {program.priceLabel ? (
-                  <div className="flex h-14 items-center justify-center border-b border-border px-6">
-                    <p className="text-sm text-charcoal">
-                      <span className="text-brown">Price:</span>{" "}
-                      <span className="font-heading text-xl leading-none">{program.priceLabel}</span>
-                    </p>
-                  </div>
-                ) : null}
+                <div className="flex h-14 items-center justify-center border-b border-border px-6">
+                  <p className="text-sm text-charcoal">
+                    <span className="text-brown">Price:</span>{" "}
+                    <span className="font-heading text-xl leading-none">{priceLabel}</span>
+                  </p>
+                </div>
                 <div className="space-y-4 p-6">
                   {programSidebarCtaText(program.title).map((paragraph) => (
                     <p key={paragraph} className="text-sm leading-relaxed text-brown">
