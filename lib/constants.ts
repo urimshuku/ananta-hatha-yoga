@@ -9,7 +9,7 @@ export const SITE_TAGLINE = "Above all, balance.";
 
 /** Footer certification badge (local file only). */
 export const FOOTER_CERTIFICATION_LOGO = {
-  src: "/images/certified-teacher-logo.avif",
+  src: "/images/Sadhguru_Gurukulam_Logo.avif",
   alt: "Isha Hatha Yoga Certified Teacher",
   width: 512,
   height: 135,

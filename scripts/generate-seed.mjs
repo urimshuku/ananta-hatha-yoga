@@ -23,6 +23,19 @@ function blocks(...paragraphs) {
   }));
 }
 
+function defaultPracticeIndependently(title) {
+  return [
+    `Once learnt under proper guidance, ${title} can be practised independently at home. Regular, consistent practice helps deepen the benefits and integrate the practice into daily life.`,
+  ];
+}
+
+function defaultPrivateAndGroupSessions(title) {
+  return [
+    `${title} is offered in group sessions and can also be arranged privately. Group sessions provide a supportive environment for learning alongside others, while private sessions allow focused, individual attention.`,
+    "Get in touch to learn about upcoming sessions or to arrange a private or group setting.",
+  ];
+}
+
 const programs = [
   {
     title: "Angamardana",
@@ -228,7 +241,18 @@ const programs = [
 
 const docs = [];
 
-programs.forEach((p, i) => {
+const programDocs = programs.map((p) => ({
+  title: p.title,
+  slug: p.slug,
+  shortIntro: p.shortIntro,
+  whatIs: [p.body[0]],
+  aboutThePractice: [p.body[1]],
+  benefits: p.benefits,
+  practiceIndependently: defaultPracticeIndependently(p.title),
+  privateAndGroupSessions: defaultPrivateAndGroupSessions(p.title),
+}));
+
+programDocs.forEach((p, i) => {
   docs.push({
     _id: `program-${p.slug}`,
     _type: "program",
@@ -237,9 +261,11 @@ programs.forEach((p, i) => {
     published: true,
     orderRank: (i + 1) * 10,
     shortIntro: p.shortIntro,
-    body: blocks(...p.body),
+    whatIs: blocks(...p.whatIs),
+    aboutThePractice: blocks(...p.aboutThePractice),
     benefits: p.benefits,
-    experiences: p.experiences,
+    practiceIndependently: blocks(...p.practiceIndependently),
+    privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
   });
 });
 
@@ -260,7 +286,7 @@ docs.push({
   _id: "homePage",
   _type: "homePage",
   hero: {
-    headline: "Classical Hatha Yoga, in its original form",
+    headline: "Classical Hatha Yoga",
     supportingText:
       "A grounded space to learn time-honoured yogic practices with care and clarity, in Saranda, Albania.",
     primaryCta: { label: "View Upcoming Events", href: "/events" },
@@ -270,8 +296,8 @@ docs.push({
     eyebrow: "The Practice",
     heading: "What is Classical Hatha Yoga?",
     body: blocks(
-      "Classical Hatha Yoga is a methodical approach to working with the body, breath, and energy. It is not fitness or exercise — it is a complete inner science with thousands of years of refinement behind it.",
-      "Here, practices are taught in their original form, with attention to correct technique and the right understanding. The aim is not performance, but to create a body and mind that are stable, balanced, and available for life.",
+      "Classical Hatha Yoga stems from a deep understanding of the mechanics of the body, and uses yogic postures, or yogasanas, to enable the system to sustain higher dimensions of energy. By practicing this profound science, one can change and enhance the way they think, feel, and experience life.",
+      "Classical Hatha Yoga is about creating a body that is not a hurdle in your life. The body becomes a stepping stone in the progress towards blossoming into your ultimate possibility.",
     ),
   },
   featuredPrograms: [

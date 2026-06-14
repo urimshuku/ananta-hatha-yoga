@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { PortableTextBlock } from "@portabletext/types";
+import type { ReactNode } from "react";
 
 import { EventCard } from "@/components/cards/EventCard";
 import { CMSRichText } from "@/components/content/CMSRichText";
@@ -20,6 +22,27 @@ import {
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+function ProgramSection({
+  title,
+  children,
+  first = false,
+}: {
+  title: string;
+  children: ReactNode;
+  first?: boolean;
+}) {
+  return (
+    <div className={first ? undefined : "mt-12 border-t border-border pt-10"}>
+      <h2 className="font-heading text-2xl text-charcoal">{title}</h2>
+      <div className="mt-5">{children}</div>
+    </div>
+  );
+}
+
+function hasRichText(value?: PortableTextBlock[]) {
+  return Boolean(value && value.length > 0);
 }
 
 export async function generateStaticParams() {
@@ -76,14 +99,29 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
             <div>
-              {program.body && program.body.length > 0 ? (
-                <CMSRichText value={program.body} />
+              {hasRichText(program.whatIs) ? (
+                <ProgramSection title={`What is ${program.title}?`} first>
+                  <CMSRichText value={program.whatIs} />
+                </ProgramSection>
+              ) : null}
+
+              {hasRichText(program.aboutThePractice) ? (
+                <ProgramSection
+                  title="About the Practice"
+                  first={!hasRichText(program.whatIs)}
+                >
+                  <CMSRichText value={program.aboutThePractice} />
+                </ProgramSection>
               ) : null}
 
               {program.benefits && program.benefits.length > 0 ? (
-                <div className="mt-12 border-t border-border pt-10">
-                  <h2 className="font-heading text-2xl text-charcoal">Benefits</h2>
-                  <ul className="mt-5 space-y-3">
+                <ProgramSection
+                  title="Benefits"
+                  first={
+                    !hasRichText(program.whatIs) && !hasRichText(program.aboutThePractice)
+                  }
+                >
+                  <ul className="space-y-3">
                     {program.benefits.map((item, i) => (
                       <li key={i} className="flex gap-3 leading-relaxed text-[#3a322a]">
                         <span
@@ -94,26 +132,34 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </ProgramSection>
               ) : null}
 
-              {program.experiences && program.experiences.length > 0 ? (
-                <div className="mt-12 border-t border-border pt-10">
-                  <h2 className="font-heading text-2xl text-charcoal">
-                    What you may develop or experience
-                  </h2>
-                  <ul className="mt-5 space-y-3">
-                    {program.experiences.map((item, i) => (
-                      <li key={i} className="flex gap-3 leading-relaxed text-[#3a322a]">
-                        <span
-                          aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-saffron-soft"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {hasRichText(program.practiceIndependently) ? (
+                <ProgramSection
+                  title="Practice Independently"
+                  first={
+                    !hasRichText(program.whatIs) &&
+                    !hasRichText(program.aboutThePractice) &&
+                    !(program.benefits && program.benefits.length > 0)
+                  }
+                >
+                  <CMSRichText value={program.practiceIndependently} />
+                </ProgramSection>
+              ) : null}
+
+              {hasRichText(program.privateAndGroupSessions) ? (
+                <ProgramSection
+                  title="Private and Group Sessions"
+                  first={
+                    !hasRichText(program.whatIs) &&
+                    !hasRichText(program.aboutThePractice) &&
+                    !(program.benefits && program.benefits.length > 0) &&
+                    !hasRichText(program.practiceIndependently)
+                  }
+                >
+                  <CMSRichText value={program.privateAndGroupSessions} />
+                </ProgramSection>
               ) : null}
             </div>
 
@@ -147,7 +193,6 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      {/* Related upcoming events for this practice */}
       {relatedEvents.length > 0 ? (
         <Section tone="ivory" className="border-t border-border">
           <Container>

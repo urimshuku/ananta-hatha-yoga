@@ -72,9 +72,7 @@ export default async function RetreatsPage() {
           <Section tone="cream">
             <Container>
               <MotionReveal className="mx-auto max-w-2xl rounded-2xl border border-border bg-ivory px-8 py-16 text-center shadow-soft sm:py-20">
-                <span className="font-heading text-5xl text-clay/80" aria-hidden="true">
-                  ॐ
-                </span>
+                <Ornament className="mx-auto" width="w-64" />
                 <p className="eyebrow mt-6">Coming Soon</p>
                 <h2 className="mt-4 text-display-sm text-balance">
                   Retreats are on their way
@@ -102,7 +100,7 @@ export default async function RetreatsPage() {
                 <h2 className="text-display-sm text-balance">
                   An invitation to go deeper
                 </h2>
-                <Ornament className="mt-7" width="w-16" />
+                <Ornament className="mt-8" width="w-80" />
               </MotionReveal>
               <MotionStagger className="mt-12 grid gap-6 md:grid-cols-3">
                 {EXPECTATIONS.map((item) => (

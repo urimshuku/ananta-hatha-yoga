@@ -50,11 +50,19 @@ export const program = defineType({
       validation: (rule) => rule.max(280),
     }),
     defineField({
-      name: "body",
-      title: "Detailed description",
+      name: "whatIs",
+      title: "What is this practice?",
       type: "blockContent",
       group: "content",
-      description: "An educational description of the practice.",
+      description:
+        "Introductory overview for the “What is [program name]?” section on the page.",
+    }),
+    defineField({
+      name: "aboutThePractice",
+      title: "About the Practice",
+      type: "blockContent",
+      group: "content",
+      description: "A deeper description of how the practice is taught and approached.",
     }),
     defineField({
       name: "benefits",
@@ -66,11 +74,18 @@ export const program = defineType({
         "Use careful language (e.g. 'may support', 'is designed to support').",
     }),
     defineField({
-      name: "experiences",
-      title: "What participants may develop or experience",
-      type: "array",
+      name: "practiceIndependently",
+      title: "Practice Independently",
+      type: "blockContent",
       group: "content",
-      of: [{ type: "string" }],
+      description: "Guidance on learning and continuing the practice on one's own.",
+    }),
+    defineField({
+      name: "privateAndGroupSessions",
+      title: "Private and Group Sessions",
+      type: "blockContent",
+      group: "content",
+      description: "How this practice is offered in group and private settings.",
     }),
     defineField({
       name: "seo",

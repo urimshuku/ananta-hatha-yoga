@@ -1,24 +1,30 @@
 import { cn } from "@/lib/utils";
 
 /**
- * A restrained, sacred divider: a thin rule with a small centered diamond.
- * Decorative only.
+ * Ananta celestial divider — sun, tapering rules, and inward crescents.
+ * Uses the brand SVG asset. Decorative only.
  */
 export function Ornament({
   className,
-  width = "w-24",
+  width = "w-80",
 }: {
   className?: string;
   width?: string;
 }) {
   return (
     <div
-      className={cn("flex items-center justify-center gap-3", className)}
+      className={cn("flex items-center justify-center", className)}
       aria-hidden="true"
     >
-      <span className={cn("h-px bg-border-strong", width)} />
-      <span className="h-1.5 w-1.5 rotate-45 bg-clay/70" />
-      <span className={cn("h-px bg-border-strong", width)} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/ananta-divider.svg"
+        alt=""
+        width={1507}
+        height={245}
+        className={cn("h-auto max-w-full", width)}
+        decoding="async"
+      />
     </div>
   );
 }

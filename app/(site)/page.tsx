@@ -22,11 +22,24 @@ const HERO_GLOW = {
     "radial-gradient(60% 55% at 50% 0%, rgba(201,168,106,0.18) 0%, rgba(201,168,106,0) 70%)",
 };
 
-const HERO_NOTES = [
-  "Taught in its original form",
-  "In-person in Saranda, Albania",
-  "For beginners & committed practitioners",
-];
+const DEFAULT_INTRO_HEADING = "What is Classical Hatha Yoga?";
+
+function IntroHeading({ heading }: { heading?: string }) {
+  const text = heading ?? DEFAULT_INTRO_HEADING;
+  const breakAt = text.indexOf("Hatha Yoga");
+
+  if (breakAt > 0) {
+    return (
+      <>
+        {text.slice(0, breakAt).trimEnd()}
+        <br />
+        {text.slice(breakAt)}
+      </>
+    );
+  }
+
+  return text;
+}
 
 export default async function HomePage() {
   const [home, settings, events] = await Promise.all([
@@ -54,7 +67,7 @@ export default async function HomePage() {
           <MotionReveal className="mx-auto max-w-3xl text-center">
             <p className="eyebrow mb-6">{settings.brandName}</p>
             <h1 className="text-display text-balance">
-              {hero?.headline ?? "Classical Hatha Yoga, in its original form"}
+              {hero?.headline ?? "Classical Hatha Yoga"}
             </h1>
             {hero?.supportingText ? (
               <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-brown">
@@ -75,20 +88,6 @@ export default async function HomePage() {
             </div>
 
             <Ornament className="mt-14" />
-
-            <ul className="mt-8 flex flex-col items-center justify-center gap-2 text-sm text-brown sm:flex-row sm:gap-0">
-              {HERO_NOTES.map((note, i) => (
-                <li key={note} className="flex items-center">
-                  {i > 0 ? (
-                    <span
-                      aria-hidden="true"
-                      className="mx-4 hidden h-1 w-1 rounded-full bg-clay/70 sm:inline-block"
-                    />
-                  ) : null}
-                  <span>{note}</span>
-                </li>
-              ))}
-            </ul>
           </MotionReveal>
         </Container>
       </section>
@@ -101,12 +100,9 @@ export default async function HomePage() {
               {home.intro?.eyebrow ? (
                 <p className="eyebrow mb-4">{home.intro.eyebrow}</p>
               ) : null}
-              <h2 className="text-display-sm text-balance">
-                {home.intro?.heading ?? "What is Classical Hatha Yoga?"}
+              <h2 className="text-display-sm leading-[1.05]">
+                <IntroHeading heading={home.intro?.heading} />
               </h2>
-              <span className="mt-6 inline-flex rounded-full border border-border-strong bg-cream px-4 py-1.5 text-xs font-medium uppercase tracking-wide text-brown">
-                Not a fitness class
-              </span>
             </MotionReveal>
             <MotionReveal delay={0.1} className="max-w-prose">
               <CMSRichText value={home.intro?.body} className="text-lg" />

@@ -39,9 +39,24 @@ interface ProgramSeed {
   title: string;
   slug: string;
   shortIntro: string;
-  body: string[];
+  whatIs: string[];
+  aboutThePractice: string[];
   benefits: string[];
-  experiences: string[];
+  practiceIndependently: string[];
+  privateAndGroupSessions: string[];
+}
+
+function defaultPracticeIndependently(title: string): string[] {
+  return [
+    `Once learnt under proper guidance, ${title} can be practised independently at home. Regular, consistent practice helps deepen the benefits and integrate the practice into daily life.`,
+  ];
+}
+
+function defaultPrivateAndGroupSessions(title: string): string[] {
+  return [
+    `${title} is offered in group sessions and can also be arranged privately. Group sessions provide a supportive environment for learning alongside others, while private sessions allow focused, individual attention.`,
+    "Get in touch to learn about upcoming sessions or to arrange a private or group setting.",
+  ];
 }
 
 export const programSeeds: ProgramSeed[] = [
@@ -50,8 +65,10 @@ export const programSeeds: ProgramSeed[] = [
     slug: "angamardana",
     shortIntro:
       "A full-body practice rooted in the yogic system, designed to support strength, stamina, and vitality without external weights.",
-    body: [
+    whatIs: [
       "Angamardana is a practice that works with the body in a structured, rhythmic way. The name points to the idea of gaining mastery over the limbs and the whole physical system through dedicated effort.",
+    ],
+    aboutThePractice: [
       "Practised in its traditional form, Angamardana is designed to support physical strength, flexibility, and endurance while also bringing a sense of steadiness to the mind. It is a complete practice that uses only the body itself.",
     ],
     benefits: [
@@ -59,18 +76,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create greater flexibility and ease of movement",
       "Is designed to support a more energetic and stable system",
     ],
-    experiences: [
-      "A sense of physical lightness and vitality",
-      "Steadiness and focus that can carry into daily life",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Angamardana"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Angamardana"),
   },
   {
     title: "Bhastrika Kriya",
     slug: "bhastrika-kriya",
     shortIntro:
       "A breath-based practice that works with the rhythm of the breath to support energy and inner clarity.",
-    body: [
+    whatIs: [
       "Bhastrika Kriya is a practice that gives attention to the breath and its movement. Working consciously with the breath is a central thread in the yogic tradition.",
+    ],
+    aboutThePractice: [
       "When practised carefully and under guidance, Bhastrika is designed to support a sense of vitality and inner spaciousness, helping the practitioner become more aware of their own energies.",
     ],
     benefits: [
@@ -78,18 +95,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create greater awareness of the breath",
       "Is designed to support inner clarity",
     ],
-    experiences: [
-      "A feeling of openness in the chest and breath",
-      "Calm alertness after practice",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Bhastrika Kriya"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Bhastrika Kriya"),
   },
   {
     title: "Bhuta Shuddhi",
     slug: "bhuta-shuddhi",
     shortIntro:
       "A foundational process working with the five elements that form the body, offered in its classical form.",
-    body: [
+    whatIs: [
       "Bhuta Shuddhi refers to the purification of the five elements — earth, water, fire, air, and space — that the human system is composed of. It is considered a foundational process within the yogic sciences.",
+    ],
+    aboutThePractice: [
       "Taught in its original form, this practice is designed to support a sense of balance and cleanliness within the system, creating a more receptive ground for other practices.",
     ],
     benefits: [
@@ -97,18 +114,18 @@ export const programSeeds: ProgramSeed[] = [
       "May help bring a sense of inner cleanliness",
       "Can help create a stable foundation for further practice",
     ],
-    experiences: [
-      "A quiet sense of order and balance",
-      "Greater sensitivity to one's own inner state",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Bhuta Shuddhi"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Bhuta Shuddhi"),
   },
   {
     title: "Eye Care Practices",
     slug: "eye-care-practices",
     shortIntro:
       "Gentle, traditional practices for the eyes, offered to support comfort and care for the visual system.",
-    body: [
+    whatIs: [
       "The yogic tradition includes simple practices intended to care for the eyes. In a time of constant screens, these practices offer a grounded way to give attention to the eyes.",
+    ],
+    aboutThePractice: [
       "These practices are gentle and accessible, and are designed to support relaxation and comfort around the eyes when done regularly.",
     ],
     benefits: [
@@ -116,18 +133,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a habit of mindful care",
       "Is designed to support overall ease",
     ],
-    experiences: [
-      "A sense of relief around the eyes",
-      "A calmer relationship with daily screen use",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Eye Care Practices"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Eye Care Practices"),
   },
   {
     title: "Jala Neti",
     slug: "jala-neti",
     shortIntro:
       "A traditional cleansing practice for the nasal passages using water, offered in its classical form.",
-    body: [
+    whatIs: [
       "Jala Neti is a simple cleansing practice (kriya) that uses water to clear the nasal passages. It is one of the well-known hatha yoga cleansing techniques.",
+    ],
+    aboutThePractice: [
       "Practised carefully, Jala Neti is designed to support clear breathing and a sense of freshness, and is taught here with attention to correct, hygienic technique.",
     ],
     benefits: [
@@ -135,18 +152,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a sense of freshness",
       "Is designed to support nasal comfort",
     ],
-    experiences: [
-      "Easier, clearer breathing",
-      "A light, refreshed feeling",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Jala Neti"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Jala Neti"),
   },
   {
     title: "Pavanamuktasana",
     slug: "pavanamuktasana",
     shortIntro:
       "A series of accessible movements designed to support ease and freedom in the joints and body.",
-    body: [
+    whatIs: [
       "Pavanamuktasana is a set of gentle practices that work with the joints and the movement of energy through the body. The practices are accessible and can be approached by most people.",
+    ],
+    aboutThePractice: [
       "This series is designed to support a sense of looseness and ease, gently preparing the body and helping to release tension held in the joints.",
     ],
     benefits: [
@@ -154,18 +171,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a sense of lightness",
       "Is designed to support gentle release of tension",
     ],
-    experiences: [
-      "Freer, more comfortable movement",
-      "A relaxed and grounded body",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Pavanamuktasana"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Pavanamuktasana"),
   },
   {
     title: "Shanmukhi Mudra",
     slug: "shanmukhi-mudra",
     shortIntro:
       "A subtle practice that turns the attention inward, offered in its traditional form.",
-    body: [
+    whatIs: [
       "Shanmukhi Mudra is a practice in which the senses are gently drawn inward. It belongs to the more subtle dimension of yoga practice.",
+    ],
+    aboutThePractice: [
       "When approached with patience, this practice is designed to support a quiet, inward focus and a settling of the mind.",
     ],
     benefits: [
@@ -173,18 +190,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create a settled state of mind",
       "Is designed to support inner stillness",
     ],
-    experiences: [
-      "A sense of quiet and inwardness",
-      "Reduced mental restlessness",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Shanmukhi Mudra"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Shanmukhi Mudra"),
   },
   {
     title: "Surya Kriya",
     slug: "surya-kriya",
     shortIntro:
       "A potent classical practice working with the sun's energy within the system, taught in its original form.",
-    body: [
+    whatIs: [
       "Surya Kriya is a classical yogic practice that works with the dimension of the sun within the human system. It is a complete process in itself, performed as a precise sequence.",
+    ],
+    aboutThePractice: [
       "Taught in its original form, Surya Kriya is designed to support physical wellbeing, stability of the mind, and a balanced flow of energy. It asks for sincerity and consistency from the practitioner.",
     ],
     benefits: [
@@ -192,18 +209,18 @@ export const programSeeds: ProgramSeed[] = [
       "May support steadiness and vitality",
       "Can help create a stable inner foundation",
     ],
-    experiences: [
-      "A grounded, balanced state",
-      "Steady energy through the day",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Surya Kriya"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Surya Kriya"),
   },
   {
     title: "Surya Shakti",
     slug: "surya-shakti",
     shortIntro:
       "A vigorous practice derived from the same tradition as Surya Kriya, designed to build strength and energy.",
-    body: [
+    whatIs: [
       "Surya Shakti is a more physically dynamic practice that shares its roots with Surya Kriya. It places emphasis on building physical strength and stamina.",
+    ],
+    aboutThePractice: [
       "Practised in its traditional form, Surya Shakti is designed to support a strong, energetic body while keeping the breath and attention engaged throughout.",
     ],
     benefits: [
@@ -211,18 +228,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create greater energy",
       "Is designed to support an active, stable system",
     ],
-    experiences: [
-      "A strong and energised body",
-      "A sense of capability and vigour",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Surya Shakti"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Surya Shakti"),
   },
   {
     title: "Thoppukarnam",
     slug: "thoppukarnam",
     shortIntro:
       "A simple, traditional practice of movement and breath coordination, offered in its classical form.",
-    body: [
+    whatIs: [
       "Thoppukaranam is a traditional practice that coordinates movement with the breath in a repeated, rhythmic way. It has long been valued as a simple yet effective practice.",
+    ],
+    aboutThePractice: [
       "This practice is designed to support coordination, focus, and a sense of balance between body and breath.",
     ],
     benefits: [
@@ -230,18 +247,18 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create balance between body and breath",
       "Is designed to support steadiness",
     ],
-    experiences: [
-      "Improved focus and rhythm",
-      "A balanced, attentive state",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Thoppukarnam"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Thoppukarnam"),
   },
   {
     title: "Yogasanas",
     slug: "yogasanas",
     shortIntro:
       "Classical yoga postures held with awareness, designed to support the body and the flow of energy.",
-    body: [
+    whatIs: [
       "Yogasanas are the classical postures of hatha yoga. Far more than physical exercise, they are precise positions that work with the body and its energies.",
+    ],
+    aboutThePractice: [
       "Held with awareness and offered in their traditional form, Yogasanas are designed to support physical wellbeing and a deeper sense of stability and ease.",
     ],
     benefits: [
@@ -249,10 +266,8 @@ export const programSeeds: ProgramSeed[] = [
       "Can help create stability and ease",
       "Is designed to support a balanced flow of energy",
     ],
-    experiences: [
-      "A more open, comfortable body",
-      "A settled, stable inner state",
-    ],
+    practiceIndependently: defaultPracticeIndependently("Yogasanas"),
+    privateAndGroupSessions: defaultPrivateAndGroupSessions("Yogasanas"),
   },
 ];
 
@@ -271,15 +286,17 @@ export function placeholderProgramBySlug(slug: string): Program | undefined {
     title: p.title,
     slug: p.slug,
     shortIntro: p.shortIntro,
-    body: blocks(...p.body),
+    whatIs: blocks(...p.whatIs),
+    aboutThePractice: blocks(...p.aboutThePractice),
     benefits: p.benefits,
-    experiences: p.experiences,
+    practiceIndependently: blocks(...p.practiceIndependently),
+    privateAndGroupSessions: blocks(...p.privateAndGroupSessions),
   };
 }
 
 export const placeholderHomePage: HomePage = {
   hero: {
-    headline: "Classical Hatha Yoga, in its original form",
+    headline: "Classical Hatha Yoga",
     supportingText:
       "A grounded space to learn time-honoured yogic practices with care and clarity, in Saranda, Albania.",
     primaryCta: { label: "View Upcoming Events", href: "/events" },
@@ -289,8 +306,8 @@ export const placeholderHomePage: HomePage = {
     eyebrow: "The Practice",
     heading: "What is Classical Hatha Yoga?",
     body: blocks(
-      "Classical Hatha Yoga is a methodical approach to working with the body, breath, and energy. It is not fitness or exercise — it is a complete inner science with thousands of years of refinement behind it.",
-      "Here, practices are taught in their original form, with attention to correct technique and the right understanding. The aim is not performance, but to create a body and mind that are stable, balanced, and available for life.",
+      "Classical Hatha Yoga stems from a deep understanding of the mechanics of the body, and uses yogic postures, or yogasanas, to enable the system to sustain higher dimensions of energy. By practicing this profound science, one can change and enhance the way they think, feel, and experience life.",
+      "Classical Hatha Yoga is about creating a body that is not a hurdle in your life. The body becomes a stepping stone in the progress towards blossoming into your ultimate possibility.",
     ),
   },
   privateCorporate: {

@@ -81,9 +81,11 @@ export const programBySlugQuery = groq`
     title,
     "slug": slug.current,
     shortIntro,
-    body,
+    whatIs,
+    aboutThePractice,
     benefits,
-    experiences,
+    practiceIndependently,
+    privateAndGroupSessions,
     ${seoFields}
   }
 `;

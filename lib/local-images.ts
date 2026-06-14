@@ -35,5 +35,5 @@ export function programSymbolSrc(slug: string): string | null {
 }
 
 export function footerCertificationLogoSrc(): string | null {
-  return resolveLocalImageSrc([], "certified-teacher-logo");
+  return resolveLocalImageSrc([], "Sadhguru_Gurukulam_Logo");
 }

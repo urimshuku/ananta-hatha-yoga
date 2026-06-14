@@ -33,9 +33,11 @@ export interface ProgramListItem {
 }
 
 export interface Program extends ProgramListItem {
-  body?: PortableTextBlock[];
+  whatIs?: PortableTextBlock[];
+  aboutThePractice?: PortableTextBlock[];
   benefits?: string[];
-  experiences?: string[];
+  practiceIndependently?: PortableTextBlock[];
+  privateAndGroupSessions?: PortableTextBlock[];
   seo?: SeoFields;
 }
 

@@ -5,10 +5,10 @@ Footer certification logo
 -------------------------
 Save your badge as ONE of:
 
-  certified-teacher-logo.avif
-  certified-teacher-logo.png
-  certified-teacher-logo.jpg
-  certified-teacher-logo.webp
+  Sadhguru_Gurukulam_Logo.avif
+  Sadhguru_Gurukulam_Logo.png
+  Sadhguru_Gurukulam_Logo.jpg
+  Sadhguru_Gurukulam_Logo.webp
 
 Program photos
 --------------
