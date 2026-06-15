@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
-import { ProgramCard } from "@/components/cards/ProgramCard";
+import { ProgramsListing } from "@/components/programs/ProgramsListing";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/ui/CTASection";
-import { MotionItem, MotionStagger } from "@/components/ui/Motion";
 import { MotionReveal } from "@/components/ui/MotionReveal";
 import { PageHero } from "@/components/ui/PageHero";
+import { partitionProgramsByCategory } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 import { getPrograms } from "@/sanity/lib/fetch";
 
@@ -20,24 +20,19 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ProgramsPage() {
   const programs = await getPrograms();
+  const { main, special } = partitionProgramsByCategory(programs);
 
   return (
     <>
       <PageHero
         eyebrow="Programs"
         title="Classical Hatha Yoga practices"
-        description="Each program below is a complete practice within the Classical Hatha Yoga system, taught with care for correct technique and the right understanding."
+        description="Core programs form the foundation of the practice. Special programs address specific needs and can be explored alongside them."
       />
 
       <Section tone="cream">
         <Container>
-          <MotionStagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {programs.map((program) => (
-              <MotionItem key={program._id} className="h-full">
-                <ProgramCard program={program} />
-              </MotionItem>
-            ))}
-          </MotionStagger>
+          <ProgramsListing mainPrograms={main} specialPrograms={special} />
         </Container>
       </Section>
 

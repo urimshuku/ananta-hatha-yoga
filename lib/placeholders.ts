@@ -11,7 +11,7 @@ import type {
   SiteSettings,
   YogaEvent,
 } from "@/sanity/lib/types";
-import { CONTACT, getProgramPriceLabel, programAfterProgramText, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { CONTACT, getProgramPriceLabel, PROGRAM_ORDER, programAfterProgramText, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
 /** Build a minimal Portable Text block from plain paragraphs. */
 export function blocks(...paragraphs: string[]): PortableTextBlock[] {
@@ -334,6 +334,10 @@ export const programSeeds: ProgramSeed[] = [
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Yogasanas"),
   },
 ];
+
+programSeeds.sort(
+  (a, b) => PROGRAM_ORDER.indexOf(a.slug) - PROGRAM_ORDER.indexOf(b.slug),
+);
 
 export const placeholderPrograms: ProgramListItem[] = programSeeds.map((p) => ({
   _id: `placeholder-${p.slug}`,

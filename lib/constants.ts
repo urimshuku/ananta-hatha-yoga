@@ -123,6 +123,41 @@ export function getProgramVideoLink(slug: string, programTitle: string) {
 
 export const PROGRAM_DEFAULT_PRICE_LABEL = "Contact for details";
 
+export const MAIN_PROGRAM_SLUGS = [
+  "surya-kriya",
+  "surya-shakti",
+  "yogasanas",
+  "angamardana",
+  "bhuta-shuddhi",
+] as const;
+
+export const SPECIAL_PROGRAM_SLUGS = [
+  "bhastrika-kriya",
+  "jala-neti",
+  "thoppukarnam",
+  "shanmukhi-mudra",
+  "eye-care-practices",
+  "pavanamuktasana",
+] as const;
+
+export const PROGRAM_ORDER: readonly string[] = [
+  ...MAIN_PROGRAM_SLUGS,
+  ...SPECIAL_PROGRAM_SLUGS,
+];
+
+export function partitionProgramsByCategory<T extends { slug: string }>(programs: T[]) {
+  const bySlug = new Map(programs.map((program) => [program.slug, program]));
+
+  const main = MAIN_PROGRAM_SLUGS.map((slug) => bySlug.get(slug)).filter(
+    (program): program is T => program != null,
+  );
+  const special = SPECIAL_PROGRAM_SLUGS.map((slug) => bySlug.get(slug)).filter(
+    (program): program is T => program != null,
+  );
+
+  return { main, special };
+}
+
 const PROGRAM_PRICE_LABELS: Record<string, string> = {
   angamardana: "300€",
   "bhastrika-kriya": "55€",

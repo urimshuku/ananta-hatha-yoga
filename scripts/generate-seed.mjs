@@ -51,6 +51,20 @@ const PROGRAM_PRICE_LABELS = {
   yogasanas: "275€",
 };
 
+const PROGRAM_ORDER = [
+  "surya-kriya",
+  "surya-shakti",
+  "yogasanas",
+  "angamardana",
+  "bhuta-shuddhi",
+  "bhastrika-kriya",
+  "jala-neti",
+  "thoppukarnam",
+  "shanmukhi-mudra",
+  "eye-care-practices",
+  "pavanamuktasana",
+];
+
 function programPriceLabel(slug, priceLabel) {
   if (priceLabel?.trim()) return priceLabel.trim();
   return PROGRAM_PRICE_LABELS[slug] ?? "Contact for details";
@@ -342,6 +356,10 @@ const programs = [
     ],
   },
 ];
+
+programs.sort(
+  (a, b) => PROGRAM_ORDER.indexOf(a.slug) - PROGRAM_ORDER.indexOf(b.slug),
+);
 
 const docs = [];
 

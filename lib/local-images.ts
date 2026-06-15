@@ -1,3 +1,5 @@
+import "server-only";
+
 import fs from "node:fs";
 import path from "node:path";
 
@@ -37,6 +39,7 @@ const PROGRAM_IMAGE_OBJECT_POSITION: Partial<Record<string, string>> = {
   "shanmukhi-mudra": "object-[30%_center]",
   "surya-kriya": "object-[85%_center]",
   "surya-shakti": "object-[28%_center]",
+  yogasanas: "object-[22%_center]",
 };
 
 export function programImageObjectPositionClass(slug: string): string {
