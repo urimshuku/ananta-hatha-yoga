@@ -260,18 +260,24 @@ export const programSeeds: ProgramSeed[] = [
   {
     title: "Surya Shakti",
     slug: "surya-shakti",
+    priceLabel: "95€",
     shortIntro:
-      "A vigorous practice derived from the same tradition as Surya Kriya, designed to build strength and energy.",
+      "\"Surya\" means \"Sun,\" and \"Shakti\" means \"energy\". Surya Shakti is a dynamic form of the Sun Salutation which is an ancient yogic practice with a powerful sequence of 18 postures.",
     whatIs: [
-      "Surya Shakti is a more physically dynamic practice that shares its roots with Surya Kriya. It places emphasis on building physical strength and stamina.",
+      "Surya Shakti is to energize the system to a different dimension. This 18-step process helps to strengthen the ligaments that hold the skeletal and muscular structure together.",
     ],
     aboutThePractice: [
-      "Practised in its traditional form, Surya Shakti is designed to support a strong, energetic body while keeping the breath and attention engaged throughout.",
+      "Surya means \"Sun,\" and Shakti means \"Energy\". Surya Shakti is a complete process, which is largely physical in nature. If you do 108 cycles of Surya Shakti, it will make you fit and you will not need any other form of exercise.",
+      "Surya Shakti builds the physical body – it makes the sinews and ligaments of your body strong. In Yoga, we give importance to the sinews that hold the skeletal system and the whole body together. When we do any yogic practice, which is physical in nature, the focus is mainly to strengthen those, not to pump up your muscles. Strengthening the sinews of the body is what will endure for a long time and keep you well. Surya Shakti does this in a tremendous way.",
     ],
     benefits: [
-      "May support physical strength and stamina.",
-      "Can help create greater energy.",
-      "Is designed to support an active, stable system.",
+      "Brings about physical fitness and overall wellbeing.",
+      "Makes the sinews and ligaments of the body strong.",
+      "Increases mental alertness and focus.",
+      "Creates a basis for one to move into higher states of energy.",
+      "Increases physical strength and stamina.",
+      "Realigns the musculoskeletal system.",
+      "Increases energy levels.",
     ],
     practiceIndependently: defaultAfterProgramText("Surya Shakti"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Surya Shakti"),
@@ -279,18 +285,26 @@ export const programSeeds: ProgramSeed[] = [
   {
     title: "Thoppukarnam",
     slug: "thoppukarnam",
+    priceLabel: "55€",
     shortIntro:
-      "A simple, traditional practice of movement and breath coordination, offered in its classical form.",
+      "Thoppukarnam is a practice which helps with neurological vitality and different neurological issues. It is also known as \"brain yoga\".",
     whatIs: [
-      "Thoppukaranam is a traditional practice that coordinates movement with the breath in a repeated, rhythmic way. It has long been valued as a simple yet effective practice.",
+      "The word Thoppukarnam comes from the Sanskrit words 'thorpi' meaning 'holding by hands' and 'karnam' means 'ears'. With usage it has become 'Thoppukarnam'.",
     ],
     aboutThePractice: [
-      "This practice is designed to support coordination, focus, and a sense of balance between body and breath.",
+      "Thoppukarnam is a practice which helps with neurological vitality and different neurological issues. It is also known as \"brain yoga\".",
     ],
     benefits: [
-      "May support coordination and focus.",
-      "Can help create balance between body and breath.",
-      "Is designed to support steadiness.",
+      "Exercise the body.",
+      "Activates the brain.",
+      "Brings balance between right and left brain.",
+      "Leads to neurological alertness.",
+      "Enhances thinking capacity, concentration and memory.",
+      "Releases tension and brings ease.",
+      "Helps with mild depression and anxiety.",
+      "Beneficial for those with diabetes.",
+      "Beneficial for adults with Alzheimer's Disease.",
+      "Beneficial for children especially those with diabetes, autism, dyslexia, ADD.",
     ],
     practiceIndependently: defaultAfterProgramText("Thoppukarnam"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Thoppukarnam"),
@@ -298,18 +312,23 @@ export const programSeeds: ProgramSeed[] = [
   {
     title: "Yogasanas",
     slug: "yogasanas",
+    priceLabel: "275€",
+    videoUrl: "https://youtu.be/4ZdcGKUQufU?si=5a5AXn98IYG1UsO0",
     shortIntro:
-      "Classical yoga postures held with awareness, designed to support the body and the flow of energy.",
+      "The word \"asana\" literally means a posture. Out of the innumerable asanas a body can assume, 84 have been identified as Yogasanas, through which one can transform the body and mind into a possibility for ultimate wellbeing.",
     whatIs: [
-      "Yogasanas are the classical postures of hatha yoga. Far more than physical exercise, they are precise positions that work with the body and its energies.",
+      "Yogasanas are a set of powerful postures through which one can elevate one's consciousness and manipulate energies.",
+      "The word asana literally means a posture. Out of the innumerable asanas a body can assume, 84 have been identified as Yogasanas, through which one can transform the body and mind into a possibility for ultimate well-being. Yogasanas are not exercises, but rather very subtle processes to manipulate one's energy in a particular direction.",
+      "In an untrained state, the human body is a constant manifestation of various levels of compulsiveness. By consciously forming the body into a certain posture, one creates a conducive passage for energy flow that can elevate one's consciousness. Yogasanas are a way of aligning the inner system and adjusting it to the celestial geometry, thereby becoming in sync with the existence and naturally achieving a chemistry of healthfulness, joyfulness, blissfulness, and above all, balance.",
     ],
     aboutThePractice: [
-      "Held with awareness and offered in their traditional form, Yogasanas are designed to support physical wellbeing and a deeper sense of stability and ease.",
+      "Hatha Yoga is offered as a set of 21 powerful postures, or yogasanas, to enable the system to sustain higher dimensions of energy. This profound science enhances how one thinks, feels, and experiences life. Isha's program requires no special physical agility or previous experience of yoga. It is not merely physical exercise, but enables a person to flower into his ultimate potential; to naturally achieve a state of health, joy, and bliss.",
     ],
     benefits: [
-      "May support flexibility and physical wellbeing.",
-      "Can help create stability and ease.",
-      "Is designed to support a balanced flow of energy.",
+      "Relief of chronic health conditions.",
+      "Evolution of body and mind towards a higher possibility.",
+      "Stabilization of the body, mind and energy system.",
+      "Deceleration of the aging process.",
     ],
     practiceIndependently: defaultAfterProgramText("Yogasanas"),
     privateAndGroupSessions: defaultPrivateAndGroupSessions("Yogasanas"),

@@ -132,6 +132,9 @@ const PROGRAM_PRICE_LABELS: Record<string, string> = {
   pavanamuktasana: "55€",
   "shanmukhi-mudra": "55€",
   "surya-kriya": "150€",
+  "surya-shakti": "95€",
+  thoppukarnam: "55€",
+  yogasanas: "275€",
 };
 
 export function getProgramPriceLabel(slug: string, priceLabel?: string | null): string {
