@@ -47,13 +47,7 @@ function IconBeforeStart(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("lg")} aria-hidden="true" {...props}>
       <path
-        d="M12 19V5"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="M8.5 8.5 12 5l3.5 3.5"
+        d="M6.5 6.5 4.5 8.5 6.5 10.5 6.5 8.5H17A4 4 0 0 1 17 16.5H9"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinecap="round"
@@ -66,14 +60,9 @@ function IconBeforeStart(props: IconProps) {
 function IconDuringSession(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("lg")} aria-hidden="true" {...props}>
-      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.4" />
-      <path
-        d="M12 7.5V12l3 2"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+      <circle cx="17" cy="12" r="1.5" fill="currentColor" />
     </svg>
   );
 }
@@ -81,12 +70,7 @@ function IconDuringSession(props: IconProps) {
 function IconAfterProgram(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("lg")} aria-hidden="true" {...props}>
-      <path
-        d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-2.5Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
+      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.4" />
       <path
         d="m8.5 12.5 2 2 5-5"
         stroke="currentColor"
@@ -116,22 +100,10 @@ function IconClothing(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("sm")} aria-hidden="true" {...props}>
       <path
-        d="M7.5 5h3.5l-.8 14.5a1.5 1.5 0 0 0 2.1 1.4L11 7.5V5H7.5Z"
+        d="M7.5 7Q9.5 10 12 10Q14.5 10 16.5 7L19 10.5L16.5 12.5V18Q16.5 19.75 15 19.75H9Q7.5 19.75 7.5 18V12.5L5 10.5L7.5 7Z"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinejoin="round"
-      />
-      <path
-        d="M13 5h3.5l.8 14.5a1.5 1.5 0 0 1-2.1 1.4L13 7.5V5Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7.5 7h3.5M13 7h3.5"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
       />
     </svg>
   );
@@ -241,16 +213,10 @@ function IconDignity(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("sm")} aria-hidden="true" {...props}>
       <path
-        d="M12 4.5c2.8 0 5 2.6 5 6s-2.2 9-5 9.5c-2.8-.5-5-5.5-5-9.5s2.2-6 5-6Z"
+        d="M12 19.5c-3.5-2.5-6.5-5-6.5-8.2a3.7 3.7 0 0 1 6.5-2.5 3.7 3.7 0 0 1 6.5 2.5c0 3.2-3 5.7-6.5 8.2Z"
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinejoin="round"
-      />
-      <path
-        d="M12 7.5v8"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
       />
     </svg>
   );
@@ -300,12 +266,8 @@ function IconTemperature(props: IconProps) {
 function IconNutrition(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={iconClass("sm")} aria-hidden="true" {...props}>
-      <path
-        d="M12 19.5c-3.5-2.5-6.5-5-6.5-8.2a3.7 3.7 0 0 1 6.5-2.5 3.7 3.7 0 0 1 6.5 2.5c0 3.2-3 5.7-6.5 8.2Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
+      <circle cx="12" cy="12" r="7.5" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.4" />
     </svg>
   );
 }

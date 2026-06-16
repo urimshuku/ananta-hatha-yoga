@@ -45,6 +45,9 @@ export const PREGNANCY_LABEL = "For women, are you currently pregnant?";
 export const MEDICAL_DISCLAIMER_INTRO =
   "Please review the Medical Acknowledgement & Liability Disclaimer before proceeding:";
 
+export const MEDICAL_DISCLAIMER_TITLE =
+  "Medical Acknowledgement and Liability Disclaimer and GDPR/Data Protection Consent";
+
 /**
  * Full Medical Acknowledgement & Liability Disclaimer document, shown in a
  * themed pop-up when the user clicks "Click Here".
@@ -151,7 +154,7 @@ export const MEDICAL_DISCLAIMER_BULLETS = [
 ] as const;
 
 export const MEDICAL_DISCLAIMER_CONSENT_LABEL =
-  "I have read and agree to the Medical Acknowledgement and Liability Disclaimer";
+  "I have read and agree to the Medical Acknowledgement and Liability Disclaimer and GDPR/Data Protection Consent";
 
 /* ------------------------------------------------------------------ */
 /* Step 4 — Agreement                                                  */

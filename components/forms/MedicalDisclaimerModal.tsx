@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import {
   MEDICAL_DISCLAIMER_DOCUMENT,
+  MEDICAL_DISCLAIMER_TITLE,
   type DisclaimerItem,
 } from "@/lib/register-content";
 
@@ -168,7 +169,7 @@ export function MedicalDisclaimerModal({ open, onClose }: MedicalDisclaimerModal
               id="disclaimer-title"
               className="font-heading text-2xl text-charcoal"
             >
-              Medical Acknowledgement & Liability Disclaimer
+              {MEDICAL_DISCLAIMER_TITLE}
             </h2>
           </div>
           <button
