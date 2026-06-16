@@ -98,45 +98,57 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="phone" className={labelClass}>
-            Phone
+            Phone <span className="text-saffron">*</span>
           </label>
           <input
             id="phone"
             name="phone"
             type="tel"
+            required
             autoComplete="tel"
             className={fieldClass}
           />
         </div>
         <div>
-          <label htmlFor="interest" className={labelClass}>
-            Interest / program
+          <label htmlFor="preferredTime" className={labelClass}>
+            Preferred date / time
           </label>
-          <select id="interest" name="interest" className={fieldClass} defaultValue="">
+          <input
+            id="preferredTime"
+            name="preferredTime"
+            type="text"
+            placeholder="e.g. Weekday mornings"
+            className={fieldClass}
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="program" className={labelClass}>
+            Program
+          </label>
+          <select id="program" name="program" className={fieldClass} defaultValue="">
             <option value="">Select a program (optional)</option>
             {programs.map((p) => (
               <option key={p} value={p}>
                 {p}
               </option>
             ))}
-            <option value="Private session">Private session</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="interest" className={labelClass}>
+            Interest
+          </label>
+          <select id="interest" name="interest" className={fieldClass} defaultValue="">
+            <option value="">Select an interest (optional)</option>
+            <option value="One-on-One Session">One-on-One Session</option>
+            <option value="Small-Group Session">Small-Group Session</option>
             <option value="Corporate session">Corporate session</option>
             <option value="General enquiry">General enquiry</option>
           </select>
         </div>
-      </div>
-
-      <div>
-        <label htmlFor="preferredTime" className={labelClass}>
-          Preferred date / time
-        </label>
-        <input
-          id="preferredTime"
-          name="preferredTime"
-          type="text"
-          placeholder="e.g. Weekday mornings"
-          className={fieldClass}
-        />
       </div>
 
       <div>

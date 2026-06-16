@@ -6,6 +6,7 @@ interface ContactPayload {
   fullName?: string;
   email?: string;
   phone?: string;
+  program?: string;
   interest?: string;
   preferredTime?: string;
   message?: string;
@@ -31,9 +32,10 @@ export async function POST(request: Request) {
 
   const fullName = data.fullName?.trim();
   const email = data.email?.trim();
+  const phone = data.phone?.trim();
   const message = data.message?.trim();
 
-  if (!fullName || !email || !message) {
+  if (!fullName || !email || !phone || !message) {
     return NextResponse.json(
       { error: "Please complete all required fields." },
       { status: 400 },
@@ -58,7 +60,8 @@ export async function POST(request: Request) {
     await deliverSubmission({
       fullName,
       email,
-      phone: data.phone?.trim(),
+      phone,
+      program: data.program?.trim(),
       interest: data.interest?.trim(),
       preferredTime: data.preferredTime?.trim(),
       message,

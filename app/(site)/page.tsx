@@ -27,6 +27,21 @@ const HERO_GLOW = {
 
 const DEFAULT_INTRO_HEADING = "What is Classical Hatha Yoga?";
 
+const PRIVATE_OFFERINGS = [
+  {
+    title: "One-on-One Session",
+    body: "Highly personalized instruction tailored to your specific physical capabilities and wellbeing goals. Ideal for those seeking deeper refinement or specific health support.",
+  },
+  {
+    title: "Small-Group Session",
+    body: "Gather friends, family, or colleagues for a private session. A focused environment that balances personalized attention with shared experience.",
+  },
+  {
+    title: "Corporate Session",
+    body: "Bring ancient tools for clarity and balance into the workplace. Designed to combat stress and foster a vibrant, focused professional environment.",
+  },
+] as const;
+
 function IntroHeading({ heading }: { heading?: string }) {
   const text = heading ?? DEFAULT_INTRO_HEADING;
   const breakAt = text.indexOf("Hatha Yoga");
@@ -192,47 +207,40 @@ export default async function HomePage() {
       {/* 5. Private & Corporate Sessions */}
       <Section tone="sand" size="small">
         <Container>
-          <MotionReveal className="mx-auto max-w-2xl rounded-2xl border border-border-strong/60 bg-cream/60 px-8 py-12 text-center sm:px-12">
-            <p className="eyebrow mb-4">Tailored Sessions</p>
-            <h2 className="text-display-sm">
-              {home.privateCorporate?.heading ?? "Private & Corporate Sessions"}
-            </h2>
-            <div className="mt-5 text-lg leading-relaxed text-brown [&_p]:text-brown">
-              <CMSRichText value={home.privateCorporate?.body} />
-            </div>
-            <div className="mt-7">
-              <Button href="/contact" variant="secondary">
-                Enquire about private sessions
-              </Button>
-            </div>
-          </MotionReveal>
+          <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <MotionReveal>
+              <h2 className="text-display-sm text-balance">Private Sessions</h2>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-brown">
+                Private sessions are available upon request. Depending on the needs of the
+                individual, group, or organization, selected Classical Hatha Yoga practices can be
+                offered in a focused setting.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" variant="secondary">
+                  Request a private session
+                </Button>
+              </div>
+            </MotionReveal>
+
+            <MotionStagger className="grid gap-5">
+              {PRIVATE_OFFERINGS.map((offering) => (
+                <MotionItem key={offering.title}>
+                  <article className="rounded-2xl border border-border-strong/60 bg-cream/70 px-7 py-7 shadow-soft sm:px-8">
+                    <h3 className="font-heading text-2xl text-charcoal">
+                      {offering.title}
+                    </h3>
+                    <p className="mt-4 leading-relaxed text-brown">
+                      {offering.body}
+                    </p>
+                  </article>
+                </MotionItem>
+              ))}
+            </MotionStagger>
+          </div>
         </Container>
       </Section>
 
-      {/* 6. About preview */}
-      <Section tone="ivory" className="border-t border-border">
-        <Container>
-          <MotionReveal className="mx-auto max-w-2xl text-center">
-            {home.aboutIntro?.eyebrow ? (
-              <p className="eyebrow mb-4">{home.aboutIntro.eyebrow}</p>
-            ) : null}
-            <h2 className="text-display-sm text-balance">
-              {home.aboutIntro?.heading ?? "A quiet, serious space for practice"}
-            </h2>
-            <Ornament className="mt-7" width="w-16" />
-            <div className="mt-7 text-lg leading-relaxed text-brown [&_p]:text-brown">
-              <CMSRichText value={home.aboutIntro?.body} />
-            </div>
-            <div className="mt-7">
-              <Button href="/about" variant="ghost">
-                Read more about us &rarr;
-              </Button>
-            </div>
-          </MotionReveal>
-        </Container>
-      </Section>
-
-      {/* 7. Final CTA */}
+      {/* 6. Final CTA */}
       <CTASection
         heading={home.finalCta?.heading}
         body={home.finalCta?.body}

@@ -34,6 +34,7 @@ export interface ContactSubmission {
   fullName: string;
   email: string;
   phone?: string;
+  program?: string;
   interest?: string;
   preferredTime?: string;
   message: string;
@@ -45,6 +46,7 @@ export function formatSubmission(s: ContactSubmission): string {
     `Name: ${s.fullName}`,
     `Email: ${s.email}`,
     `Phone: ${s.phone || "-"}`,
+    `Program: ${s.program || "-"}`,
     `Interest: ${s.interest || "-"}`,
     `Preferred time: ${s.preferredTime || "-"}`,
     "",
