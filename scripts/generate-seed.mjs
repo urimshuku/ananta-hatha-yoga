@@ -48,7 +48,7 @@ const PROGRAM_PRICE_LABELS = {
   "surya-kriya": "150€",
   "surya-shakti": "95€",
   thoppukarnam: "55€",
-  yogasanas: "275€",
+  yogasanas: "220€",
 };
 
 const PROGRAM_ORDER = [
@@ -332,7 +332,7 @@ const programs = [
   {
     title: "Yogasanas",
     slug: "yogasanas",
-    priceLabel: "275€",
+    priceLabel: "220€",
     videoUrl: "https://youtu.be/4ZdcGKUQufU?si=5a5AXn98IYG1UsO0",
     shortIntro:
       "The word \"asana\" literally means a posture. Out of the innumerable asanas a body can assume, 84 have been identified as Yogasanas, through which one can transform the body and mind into a possibility for ultimate wellbeing.",
@@ -538,94 +538,191 @@ legal.forEach((l) => {
   });
 });
 
-// A couple of sample events (dates relative to generation time)
-const now = new Date();
-const inDays = (d) => {
-  const date = new Date(now);
-  date.setDate(date.getDate() + d);
-  date.setHours(7, 0, 0, 0);
-  return date.toISOString();
-};
-
-docs.push({
-  _id: "event-sample-surya-kriya",
-  _type: "event",
-  title: "Surya Kriya — Morning Intensive",
-  published: true,
-  date: inDays(21),
-  time: "7:00 - 9:00 AM",
-  location: "Saranda, Albania",
-  priceLabel: "Contact for details",
-  teacher: "Erlinda Mustafaraj",
-  category: "Workshop",
-  relatedProgram: { _type: "reference", _ref: "program-surya-kriya" },
-  description:
-    "A focused morning session to learn and refine Surya Kriya in its classical form. Suitable for sincere beginners and returning practitioners.",
-  whatsappEnabled: true,
-});
-
-docs.push({
-  _id: "event-sample-intro",
-  _type: "event",
-  title: "Introduction to Classical Hatha Yoga",
-  published: true,
-  date: inDays(35),
-  time: "6:00 - 7:30 PM",
-  location: "Saranda, Albania",
-  priceLabel: "Free",
-  teacher: "Erlinda Mustafaraj",
-  category: "Free Session",
-  description:
-    "An open evening to understand what Classical Hatha Yoga is, how it differs from fitness yoga, and how to begin.",
-  whatsappEnabled: true,
-});
-
-// Surya Kriya — Saranda intensive (27-29 June 2026)
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.navahathayoga.com";
 
-const suryaKriyaProgram = programs.find((p) => p.slug === "surya-kriya");
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-const suryaKriyaEventDescription = [
-  ...(suryaKriyaProgram?.aboutThePractice ?? []),
-  "",
-  "Benefits:",
-  ...(suryaKriyaProgram?.benefits ?? []).map((benefit) => `\u2022 ${benefit}`),
-  "",
-  "Duration: 3 sessions / 2 hours.",
-  "27 June: 4.30 pm – 6.30 pm",
-  "28 June: 4.30 pm – 6.30 pm",
-  "29 June: 4.30 pm – 6.30 pm",
-].join("\n");
+function toEventDate(year, month, day, endOfSession = false) {
+  const hour = endOfSession ? 16 : 14;
+  return new Date(Date.UTC(year, month - 1, day, hour, 30, 0, 0)).toISOString();
+}
 
-const suryaKriyaPaymentNote = "Payment details will be shared after registration.";
+function buildSessionSchedule(startDay, endDay, month) {
+  const monthName = MONTH_NAMES[month - 1];
+  const sessionLines = [];
+  for (let day = startDay; day <= endDay; day++) {
+    sessionLines.push(`${day} ${monthName}: 4.30 pm – 6.30 pm`);
+  }
+  const sessionCount = endDay - startDay + 1;
+  const time = [...sessionLines, "", `All ${sessionCount} sessions are mandatory`].join("\n");
+  return { sessionLines, sessionCount, time };
+}
 
-const suryaKriyaEventTime = [
-  "27 June: 4.30 pm – 6.30 pm",
-  "28 June: 4.30 pm – 6.30 pm",
-  "29 June: 4.30 pm – 6.30 pm",
-  "",
-  "All 3 sessions are mandatory",
-].join("\n");
+function buildEventDescription(program, sessionLines, sessionCount, durationLabel) {
+  return [
+    ...(program?.aboutThePractice ?? []),
+    "",
+    "Benefits:",
+    ...(program?.benefits ?? []).map((benefit) => `\u2022 ${benefit}`),
+    "",
+    `Duration: ${durationLabel ?? `${sessionCount} sessions / 2 hours.`}`,
+    ...sessionLines,
+  ].join("\n");
+}
 
-docs.push({
-  _id: "event-surya-kriya-saranda-jun-2026",
-  _type: "event",
-  title: "Surya Kriya",
-  published: true,
-  date: "2026-06-27T14:30:00.000Z",
-  endDate: "2026-06-29T16:30:00.000Z",
-  time: suryaKriyaEventTime,
-  location: "Rruga Skenderbeu 31, 9701, Saranda",
-  priceLabel: "150€",
-  paymentNote: suryaKriyaPaymentNote,
-  teacher: "Erlinda Mustafaraj",
-  ageRequirement: "14+",
-  category: "Workshop",
-  relatedProgram: { _type: "reference", _ref: "program-surya-kriya" },
-  description: suryaKriyaEventDescription,
-  registrationLink: `${SITE_URL}/contact`,
-  whatsappEnabled: false,
+function resolveEventSchedule(event) {
+  if (event.schedule) {
+    const { durationLabel, sessionLines, sessionCount } = event.schedule;
+    const time = [...sessionLines, "", `All ${sessionCount} sessions are mandatory`].join("\n");
+    return { sessionLines, sessionCount, time, durationLabel };
+  }
+
+  const built = buildSessionSchedule(event.startDay, event.endDay, event.month);
+  return { ...built, durationLabel: undefined };
+}
+
+const eventPaymentNote = "Payment details will be shared after registration.";
+const eventLocation = "Rruga Skenderbeu 31, 9701, Saranda";
+const tiranaEventLocation = "Albania Yoga Center, 8RGM+54V, Tiranë, Albania";
+
+const scheduledEvents = [
+  {
+    id: "surya-kriya-saranda-jun-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 6,
+    startDay: 27,
+    endDay: 29,
+    ageRequirement: "14+",
+  },
+  {
+    id: "surya-kriya-jul-2026-1",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 7,
+    startDay: 10,
+    endDay: 12,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "surya-kriya-jul-2026-2",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 7,
+    startDay: 24,
+    endDay: 26,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+    location: tiranaEventLocation,
+  },
+  {
+    id: "surya-kriya-aug-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 8,
+    startDay: 14,
+    endDay: 16,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "surya-shakti-aug-2026",
+    programSlug: "surya-shakti",
+    title: "Surya Shakti",
+    year: 2026,
+    month: 8,
+    startDay: 22,
+    endDay: 23,
+    location: tiranaEventLocation,
+    date: "2026-08-22T14:30:00.000Z",
+    endDate: "2026-08-23T16:15:00.000Z",
+    schedule: {
+      durationLabel: "2 sessions / 1 hour 45 min",
+      sessionLines: [
+        "22 August: 4.30 pm – 6.15 pm",
+        "23 August: 4.30 pm – 6.15 pm",
+      ],
+      sessionCount: 2,
+    },
+  },
+  {
+    id: "surya-kriya-sep-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 9,
+    startDay: 4,
+    endDay: 6,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "yogasanas-sep-2026",
+    programSlug: "yogasanas",
+    title: "Yogasanas",
+    year: 2026,
+    month: 9,
+    startDay: 25,
+    endDay: 27,
+    location: tiranaEventLocation,
+    date: "2026-09-25T14:30:00.000Z",
+    endDate: "2026-09-27T16:45:00.000Z",
+    schedule: {
+      durationLabel: "5 sessions / 2 hours 15 min",
+      sessionLines: [
+        "25 September: 4.30 pm – 6.45 pm",
+        "26 September: 8.00 am – 10.15 am",
+        "4.30 pm – 6.45 pm",
+        "27 September: 8.00 am – 10.15 am",
+        "4.30 pm – 6.45 pm",
+      ],
+      sessionCount: 5,
+    },
+  },
+];
+
+scheduledEvents.forEach((event) => {
+  const program = programs.find((p) => p.slug === event.programSlug);
+  const { sessionLines, sessionCount, time, durationLabel } = resolveEventSchedule(event);
+
+  docs.push({
+    _id: `event-${event.id}`,
+    _type: "event",
+    title: event.title,
+    published: true,
+    date: event.date ?? toEventDate(event.year, event.month, event.startDay),
+    endDate: event.endDate ?? toEventDate(event.year, event.month, event.endDay, true),
+    time,
+    location: event.location ?? eventLocation,
+    priceLabel: event.priceLabel ?? programPriceLabel(event.programSlug, program?.priceLabel),
+    paymentNote: eventPaymentNote,
+    teacher: "Erlinda Mustafaraj",
+    ...(event.ageRequirement ? { ageRequirement: event.ageRequirement } : {}),
+    category: "Workshop",
+    relatedProgram: { _type: "reference", _ref: `program-${event.programSlug}` },
+    description: buildEventDescription(program, sessionLines, sessionCount, durationLabel),
+    registrationLink: `${SITE_URL}/contact`,
+    whatsappEnabled: false,
+  });
 });
 
 mkdirSync(dirname(outPath), { recursive: true });

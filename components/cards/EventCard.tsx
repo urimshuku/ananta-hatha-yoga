@@ -106,30 +106,40 @@ function EventTimeBlock({ time }: { time: string }) {
   const schedulePart = chunks[0] ?? "";
   const mandatoryPart = chunks[1]?.trim();
 
-  const sessions = schedulePart
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const match = line.match(/^([^:]+):\s*(.+)$/);
-      return match ? { day: match[1].trim(), hours: match[2].trim() } : null;
-    })
-    .filter((session): session is { day: string; hours: string } => session !== null);
+  type DayGroup = { day: string; hours: string[] };
+  const dayGroups: DayGroup[] = [];
 
-  if (sessions.length === 0) {
+  for (const line of schedulePart.split("\n").map((entry) => entry.trim()).filter(Boolean)) {
+    const match = line.match(/^([^:]+):\s*(.+)$/);
+    if (match) {
+      dayGroups.push({ day: match[1].trim(), hours: [match[2].trim()] });
+      continue;
+    }
+
+    const lastGroup = dayGroups[dayGroups.length - 1];
+    if (lastGroup) {
+      lastGroup.hours.push(line);
+    }
+  }
+
+  if (dayGroups.length === 0) {
     return <span className="whitespace-pre-line leading-relaxed">{time}</span>;
   }
 
   return (
     <div>
       <ul className="space-y-1">
-        {sessions.map((session) => (
-          <li
-            key={session.day}
-            className="grid grid-cols-[minmax(4.75rem,5.75rem)_1fr] gap-x-4 sm:grid-cols-[6.25rem_1fr]"
-          >
-            <span>{session.day}:</span>
-            <span>{session.hours}</span>
+        {dayGroups.map((group) => (
+          <li key={group.day}>
+            {group.hours.map((hours, index) => (
+              <div
+                key={`${group.day}-${hours}-${index}`}
+                className="grid grid-cols-[minmax(6.5rem,7.75rem)_1fr] gap-x-3 sm:grid-cols-[8rem_1fr] sm:gap-x-4"
+              >
+                <span>{index === 0 ? `${group.day}:` : ""}</span>
+                <span>{hours}</span>
+              </div>
+            ))}
           </li>
         ))}
       </ul>
@@ -205,7 +215,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
             ) : null}
             {event.location ? (
               <EventDetailRow icon={<IconPin />} label="Location">
-                {event.location}
+                <span className="whitespace-pre-line">{event.location}</span>
               </EventDetailRow>
             ) : null}
             {event.ageRequirement ? (

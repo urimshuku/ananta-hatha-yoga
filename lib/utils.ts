@@ -181,6 +181,7 @@ export function eventLocationBadge(location?: string | null): string {
   if (!location) return "";
 
   if (/saranda/i.test(location)) return "SARANDA, ALBANIA";
+  if (/tiran/i.test(location)) return "TIRANË, ALBANIA";
 
   const parts = location
     .split(",")

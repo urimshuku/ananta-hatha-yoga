@@ -321,7 +321,7 @@ export const programSeeds: ProgramSeed[] = [
   {
     title: "Yogasanas",
     slug: "yogasanas",
-    priceLabel: "275€",
+    priceLabel: "220€",
     videoUrl: "https://youtu.be/4ZdcGKUQufU?si=5a5AXn98IYG1UsO0",
     shortIntro:
       "The word \"asana\" literally means a posture. Out of the innumerable asanas a body can assume, 84 have been identified as Yogasanas, through which one can transform the body and mind into a possibility for ultimate wellbeing.",
@@ -454,53 +454,223 @@ export const placeholderAboutPage: AboutPage = {
   ],
 };
 
-function buildSuryaKriyaEventDescription(program: ProgramSeed): string {
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function toEventDate(year: number, month: number, day: number, endOfSession = false): string {
+  const hour = endOfSession ? 16 : 14;
+  return new Date(Date.UTC(year, month - 1, day, hour, 30, 0, 0)).toISOString();
+}
+
+function buildSessionSchedule(startDay: number, endDay: number, month: number) {
+  const monthName = MONTH_NAMES[month - 1];
+  const sessionLines: string[] = [];
+  for (let day = startDay; day <= endDay; day++) {
+    sessionLines.push(`${day} ${monthName}: 4.30 pm – 6.30 pm`);
+  }
+  const sessionCount = endDay - startDay + 1;
+  const time = [...sessionLines, "", `All ${sessionCount} sessions are mandatory`].join("\n");
+  return { sessionLines, sessionCount, time };
+}
+
+function buildProgramEventDescription(
+  program: ProgramSeed,
+  sessionLines: string[],
+  sessionCount: number,
+  durationLabel?: string,
+): string {
   return [
     ...program.aboutThePractice,
     "",
     "Benefits:",
     ...program.benefits.map((benefit) => `\u2022 ${benefit}`),
     "",
-    "Duration: 3 sessions / 2 hours.",
-    "27 June: 4.30 pm – 6.30 pm",
-    "28 June: 4.30 pm – 6.30 pm",
-    "29 June: 4.30 pm – 6.30 pm",
+    `Duration: ${durationLabel ?? `${sessionCount} sessions / 2 hours.`}`,
+    ...sessionLines,
   ].join("\n");
 }
 
-const suryaKriyaPaymentNote = "Payment details will be shared after registration.";
+function resolveEventSchedule(event: ScheduledEvent) {
+  if (event.schedule) {
+    const { durationLabel, sessionLines, sessionCount } = event.schedule;
+    const time = [...sessionLines, "", `All ${sessionCount} sessions are mandatory`].join("\n");
+    return { sessionLines, sessionCount, time, durationLabel };
+  }
 
-const suryaKriyaEventTime = [
-  "27 June: 4.30 pm – 6.30 pm",
-  "28 June: 4.30 pm – 6.30 pm",
-  "29 June: 4.30 pm – 6.30 pm",
-  "",
-  "All 3 sessions are mandatory",
-].join("\n");
+  const built = buildSessionSchedule(event.startDay, event.endDay, event.month);
+  return { ...built, durationLabel: undefined };
+}
 
-const suryaKriyaSeed = programSeeds.find((p) => p.slug === "surya-kriya");
+const eventPaymentNote = "Payment details will be shared after registration.";
+const eventLocation = "Rruga Skenderbeu 31, 9701, Saranda";
+const tiranaEventLocation = "Albania Yoga Center, 8RGM+54V, Tiranë, Albania";
 
-export const placeholderEvents: YogaEvent[] = suryaKriyaSeed
-  ? [
-      {
-        _id: "placeholder-event-surya-kriya-saranda-jun-2026",
-        title: "Surya Kriya",
-        date: "2026-06-27T14:30:00.000Z",
-        endDate: "2026-06-29T16:30:00.000Z",
-        time: suryaKriyaEventTime,
-        location: "Rruga Skenderbeu 31, 9701, Saranda",
-        priceLabel: "150€",
-        paymentNote: suryaKriyaPaymentNote,
-        teacher: "Erlinda Mustafaraj",
-        ageRequirement: "14+",
-        category: "Workshop",
-        relatedProgram: { title: suryaKriyaSeed.title, slug: suryaKriyaSeed.slug },
-        description: buildSuryaKriyaEventDescription(suryaKriyaSeed),
-        registrationLink: "/contact",
-        whatsappEnabled: false,
-      },
-    ]
-  : [];
+type EventSchedule = {
+  durationLabel: string;
+  sessionLines: string[];
+  sessionCount: number;
+};
+
+type ScheduledEvent = {
+  id: string;
+  programSlug: string;
+  title: string;
+  year: number;
+  month: number;
+  startDay: number;
+  endDay: number;
+  ageRequirement?: string;
+  priceLabel?: string;
+  schedule?: EventSchedule;
+  date?: string;
+  endDate?: string;
+  location?: string;
+};
+
+const scheduledEvents: ScheduledEvent[] = [
+  {
+    id: "surya-kriya-saranda-jun-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 6,
+    startDay: 27,
+    endDay: 29,
+    ageRequirement: "14+",
+  },
+  {
+    id: "surya-kriya-jul-2026-1",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 7,
+    startDay: 10,
+    endDay: 12,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "surya-kriya-jul-2026-2",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 7,
+    startDay: 24,
+    endDay: 26,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+    location: tiranaEventLocation,
+  },
+  {
+    id: "surya-kriya-aug-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 8,
+    startDay: 14,
+    endDay: 16,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "surya-shakti-aug-2026",
+    programSlug: "surya-shakti",
+    title: "Surya Shakti",
+    year: 2026,
+    month: 8,
+    startDay: 22,
+    endDay: 23,
+    location: tiranaEventLocation,
+    date: "2026-08-22T14:30:00.000Z",
+    endDate: "2026-08-23T16:15:00.000Z",
+    schedule: {
+      durationLabel: "2 sessions / 1 hour 45 min",
+      sessionLines: [
+        "22 August: 4.30 pm – 6.15 pm",
+        "23 August: 4.30 pm – 6.15 pm",
+      ],
+      sessionCount: 2,
+    },
+  },
+  {
+    id: "surya-kriya-sep-2026",
+    programSlug: "surya-kriya",
+    title: "Surya Kriya",
+    year: 2026,
+    month: 9,
+    startDay: 4,
+    endDay: 6,
+    ageRequirement: "14+",
+    priceLabel: "170€",
+  },
+  {
+    id: "yogasanas-sep-2026",
+    programSlug: "yogasanas",
+    title: "Yogasanas",
+    year: 2026,
+    month: 9,
+    startDay: 25,
+    endDay: 27,
+    location: tiranaEventLocation,
+    date: "2026-09-25T14:30:00.000Z",
+    endDate: "2026-09-27T16:45:00.000Z",
+    schedule: {
+      durationLabel: "5 sessions / 2 hours 15 min",
+      sessionLines: [
+        "25 September: 4.30 pm – 6.45 pm",
+        "26 September: 8.00 am – 10.15 am",
+        "4.30 pm – 6.45 pm",
+        "27 September: 8.00 am – 10.15 am",
+        "4.30 pm – 6.45 pm",
+      ],
+      sessionCount: 5,
+    },
+  },
+];
+
+export const placeholderEvents: YogaEvent[] = scheduledEvents.flatMap((event) => {
+  const program = programSeeds.find((p) => p.slug === event.programSlug);
+  if (!program) return [];
+
+  const { sessionLines, sessionCount, time, durationLabel } = resolveEventSchedule(event);
+
+  return [
+    {
+      _id: `placeholder-event-${event.id}`,
+      title: event.title,
+      date: event.date ?? toEventDate(event.year, event.month, event.startDay),
+      endDate: event.endDate ?? toEventDate(event.year, event.month, event.endDay, true),
+      time,
+      location: event.location ?? eventLocation,
+      priceLabel: event.priceLabel ?? program.priceLabel ?? getProgramPriceLabel(event.programSlug),
+      paymentNote: eventPaymentNote,
+      teacher: "Erlinda Mustafaraj",
+      ageRequirement: event.ageRequirement,
+      category: "Workshop",
+      relatedProgram: { title: program.title, slug: program.slug },
+      description: buildProgramEventDescription(
+        program,
+        sessionLines,
+        sessionCount,
+        durationLabel,
+      ),
+      registrationLink: "/contact",
+      whatsappEnabled: false,
+    },
+  ];
+});
 export const placeholderPastEvents: PastEvent[] = [];
 export const placeholderRetreats: Retreat[] = [];
 

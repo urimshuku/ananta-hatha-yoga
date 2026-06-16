@@ -171,7 +171,7 @@ const PROGRAM_PRICE_LABELS: Record<string, string> = {
   "surya-kriya": "150€",
   "surya-shakti": "95€",
   thoppukarnam: "55€",
-  yogasanas: "275€",
+  yogasanas: "220€",
 };
 
 export function getProgramPriceLabel(slug: string, priceLabel?: string | null): string {
