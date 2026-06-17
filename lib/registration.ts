@@ -1,11 +1,11 @@
+import { sendFormNotification } from "@/lib/form-email";
+
 /**
  * Central event-registration submission module.
  *
- * Mirrors lib/contact.ts: the registration form posts JSON to /api/register,
- * which validates and then calls `deliverRegistration()` below. This is the ONE
- * place to connect registrations to a real backend later (email via Resend,
- * Sanity/DB write, etc.). For now it logs to the server so the flow works
- * end-to-end with no secrets.
+ * The registration form posts JSON to /api/register, which validates and then
+ * calls `deliverRegistration()` below. Delivery is intentionally server-only so
+ * API keys and submitted details never enter the client bundle.
  */
 
 export interface RegistrationSubmission {
@@ -76,13 +76,15 @@ export function formatRegistration(s: RegistrationSubmission): string {
   ].join("\n");
 }
 
-/**
- * Deliver a validated registration. Currently logs to the server so the form
- * works end-to-end with no secrets. Replace the body with email/DB delivery
- * (see lib/contact.ts for documented options) when ready to go live.
- */
 export async function deliverRegistration(
   submission: RegistrationSubmission,
 ): Promise<void> {
-  console.info("New event registration:\n" + formatRegistration(submission));
+  const fullName = submission.fullName.replace(/\s+/g, " ").trim();
+  const eventName = submission.event?.replace(/\s+/g, " ").trim();
+
+  await sendFormNotification({
+    subject: `New registration: ${eventName || "Program registration"} - ${fullName}`,
+    replyTo: submission.email,
+    text: formatRegistration(submission),
+  });
 }

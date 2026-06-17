@@ -15,6 +15,8 @@ Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and **San
 
 ## Getting started
 
+Use Node.js 20.9 or newer.
+
 1. Install dependencies:
 
    ```bash
@@ -27,8 +29,16 @@ Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and **San
    cp .env.local.example .env.local
    ```
 
-   Then add your Sanity `projectId` and `dataset`. Create a free project at
-   [sanity.io/manage](https://www.sanity.io/manage) if you don't have one.
+   Then add your Sanity `projectId` and `dataset`, plus the server-only Resend
+   variables used by the contact and registration forms:
+
+   - `RESEND_API_KEY`
+   - `RESEND_FROM_EMAIL`
+   - `FORM_NOTIFICATION_EMAIL`
+
+   Create a free Sanity project at [sanity.io/manage](https://www.sanity.io/manage)
+   if you don't have one. Make sure `info@navahathayoga.com` is verified in
+   Resend before using it as the sender.
 
 3. Run the dev server:
 
@@ -104,9 +114,9 @@ again.
 
 ### `npm install` peer dependency errors
 
-This project uses React 19 (required by Next 16 and next-sanity 13). If you see
-`ERESOLVE` errors, make sure you're on Node 18.18+ (Node 20+ recommended) and
-delete `node_modules` + `package-lock.json`, then `npm install` again.
+This project uses React 19 and Next 16. If you see `ERESOLVE` errors, make sure
+you're on Node 20.9+ and delete `node_modules` + `package-lock.json`, then
+`npm install` again.
 
 ## Notes
 
