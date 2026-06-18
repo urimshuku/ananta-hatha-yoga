@@ -1,35 +1,31 @@
-import "server-only";
+const PROGRAM_IMAGES: Record<string, string> = {
+  angamardana: "/images/programs/angamardana.webp",
+  "bhastrika-kriya": "/images/programs/bhastrika-kriya.jpg",
+  "bhuta-shuddhi": "/images/programs/bhuta-shuddhi.webp",
+  "eye-care-practices": "/images/programs/eye-care-practices.webp",
+  "jala-neti": "/images/programs/jala-neti.jpg",
+  pavanamuktasana: "/images/programs/pavanamuktasana.webp",
+  "shanmukhi-mudra": "/images/programs/shanmukhi-mudra.webp",
+  "surya-kriya": "/images/programs/surya-kriya.webp",
+  "surya-shakti": "/images/programs/surya-shakti.webp",
+  thoppukarnam: "/images/programs/thoppukarnam.webp",
+  yogasanas: "/images/programs/yogasanas.webp",
+};
 
-import fs from "node:fs";
-import path from "node:path";
+const PROGRAM_SYMBOLS: Record<string, string> = {};
 
-const EXTENSIONS = ["avif", "webp", "jpg", "jpeg", "png"] as const;
+const ABOUT_SECTION_IMAGES: Record<string, string> = {
+  "isha-foundation": "/images/about/isha-foundation.jpg",
+  "isha-hatha-yoga-teacher-training": "/images/about/isha-hatha-yoga-teacher-training.jpg",
+  "isha-yoga-center": "/images/about/isha-yoga-center.jpg",
+  sadhguru: "/images/about/sadhguru.jpg",
+  "teacher-linda": "/images/about/teacher-linda.png",
+};
 
-/**
- * Resolve a local image under /public/images when the file exists on disk.
- * Returns the public URL path (e.g. /images/programs/surya-kriya.jpg).
- */
-export function resolveLocalImageSrc(
-  subpath: string[],
-  basename: string,
-): string | null {
-  const dir = path.join(process.cwd(), "public", "images", ...subpath);
-
-  for (const ext of EXTENSIONS) {
-    const filePath = path.join(dir, `${basename}.${ext}`);
-    if (fs.existsSync(filePath)) {
-      const urlPath = ["images", ...subpath, `${basename}.${ext}`]
-        .filter(Boolean)
-        .join("/");
-      return `/${urlPath}`;
-    }
-  }
-
-  return null;
-}
+const FOOTER_CERTIFICATION_LOGO_SRC = "/images/Sadhguru_Gurukulam_Logo.avif";
 
 export function programImageSrc(slug: string): string | null {
-  return resolveLocalImageSrc(["programs"], slug);
+  return PROGRAM_IMAGES[slug] ?? null;
 }
 
 /** Crop anchor for object-cover program photos (Tailwind object-position utilities). */
@@ -56,7 +52,7 @@ export function programSidebarImageAspectClass(slug: string): string {
 }
 
 export function programSymbolSrc(slug: string): string | null {
-  return resolveLocalImageSrc(["programs"], `${slug}-symbol`);
+  return PROGRAM_SYMBOLS[slug] ?? null;
 }
 
 /** Crop anchor for object-cover about section photos (Tailwind object-position utilities). */
@@ -66,7 +62,7 @@ const ABOUT_SECTION_IMAGE_OBJECT_POSITION: Partial<Record<string, string>> = {
 };
 
 export function aboutSectionImageSrc(key: string): string | null {
-  return resolveLocalImageSrc(["about"], key);
+  return ABOUT_SECTION_IMAGES[key] ?? null;
 }
 
 export function aboutSectionImageObjectPositionClass(key: string): string {
@@ -74,5 +70,5 @@ export function aboutSectionImageObjectPositionClass(key: string): string {
 }
 
 export function footerCertificationLogoSrc(): string | null {
-  return resolveLocalImageSrc([], "Sadhguru_Gurukulam_Logo");
+  return FOOTER_CERTIFICATION_LOGO_SRC;
 }
