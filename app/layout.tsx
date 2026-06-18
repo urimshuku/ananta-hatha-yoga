@@ -3,22 +3,41 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { fontBody, fontHeading } from "@/lib/fonts";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { getSiteSettings } from "@/sanity/lib/fetch";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_NAME} · Classical Hatha Yoga`,
-    template: `%s · ${SITE_NAME}`,
-  },
-  description: SITE_DESCRIPTION,
-  applicationName: SITE_NAME,
-  openGraph: {
-    type: "website",
-    siteName: SITE_NAME,
-    locale: "en_GB",
-  },
-  formatDetection: { telephone: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const brandName = settings.brandName ?? SITE_NAME;
+  const description =
+    settings.seo?.description ?? settings.description ?? SITE_DESCRIPTION;
+  const defaultTitle =
+    settings.seo?.title ?? `${brandName} · Classical Hatha Yoga`;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: defaultTitle,
+      template: `%s · ${brandName}`,
+    },
+    description,
+    applicationName: brandName,
+    openGraph: {
+      type: "website",
+      siteName: brandName,
+      locale: "en_GB",
+      description,
+      images: [{ ...DEFAULT_OG_IMAGE, alt: defaultTitle }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      description,
+      images: [DEFAULT_OG_IMAGE.url],
+    },
+    robots: { index: true, follow: true },
+    formatDetection: { telephone: false },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#FAF6EE",

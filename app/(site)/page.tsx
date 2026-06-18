@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { PrivateSessionsSection } from "@/components/content/PrivateSessionsSection";
 import { EventCard } from "@/components/cards/EventCard";
 import { ProgramCard } from "@/components/cards/ProgramCard";
@@ -20,7 +22,25 @@ import {
   getUpcomingEvents,
 } from "@/sanity/lib/fetch";
 import { SPECIAL_PROGRAM_SLUGS } from "@/lib/constants";
+import { buildMetadata } from "@/lib/seo";
 import { getYouTubeVideoId } from "@/lib/youtube";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [home, settings] = await Promise.all([getHomePage(), getSiteSettings()]);
+
+  return buildMetadata({
+    description:
+      home.hero?.supportingText ??
+      settings.description ??
+      undefined,
+    seo: {
+      title: home.seo?.title ?? settings.seo?.title,
+      description: home.seo?.description ?? settings.seo?.description,
+    },
+    path: "/",
+    siteName: settings.brandName,
+  });
+}
 
 const HERO_GLOW = {
   backgroundImage:

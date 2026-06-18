@@ -21,6 +21,7 @@ import {
   SITE_NAME,
   SITE_TAGLINE,
 } from "@/lib/constants";
+import { getPlaceholderLegalPages } from "@/lib/legal-content";
 
 /** Build a minimal Portable Text block from plain paragraphs. */
 export function blocks(...paragraphs: string[]): PortableTextBlock[] {
@@ -674,31 +675,5 @@ export const placeholderEvents: YogaEvent[] = scheduledEvents.flatMap((event) =>
 export const placeholderPastEvents: PastEvent[] = [];
 export const placeholderRetreats: Retreat[] = [];
 
-export const placeholderLegalPages: Record<string, LegalPage> = {
-  "terms-of-service": {
-    title: "Terms of Service",
-    slug: "terms-of-service",
-    body: blocks(
-      "These Terms of Service govern your use of the Nava Hatha Yoga website and participation in our in-person classes and programs. This is placeholder content to be reviewed and finalised before launch.",
-      "By using this website or registering for a class, you agree to engage with the practices responsibly and to follow any guidance provided by the teacher. Classes are offered in person, and registration is confirmed personally.",
-      "Please consult a qualified health professional before beginning any new practice if you have a medical condition.",
-    ),
-  },
-  "privacy-policy": {
-    title: "Privacy Policy",
-    slug: "privacy-policy",
-    body: blocks(
-      "This Privacy Policy describes how Nava Hatha Yoga handles the information you share with us. This is placeholder content to be reviewed and finalised before launch.",
-      "When you contact us through the website, we collect only the details you provide — such as your name, email, phone number, and message — in order to respond to your enquiry. We do not sell your information.",
-      "You may request access to or deletion of your information at any time by contacting us.",
-    ),
-  },
-  "cookie-policy": {
-    title: "Cookie Policy",
-    slug: "cookie-policy",
-    body: blocks(
-      "This Cookie Policy explains how Nava Hatha Yoga uses cookies and similar technologies. This is placeholder content to be reviewed and finalised before launch.",
-      "This website aims to use only essential cookies needed for the site to function. Any analytics or additional cookies would be described here and used only with appropriate consent.",
-    ),
-  },
-};
+export const placeholderLegalPages: Record<string, LegalPage> =
+  getPlaceholderLegalPages();

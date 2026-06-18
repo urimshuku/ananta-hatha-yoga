@@ -6,6 +6,10 @@ import type { SiteSettings } from "@/sanity/lib/types";
  * Rendered once site-wide.
  */
 export function StructuredData({ settings }: { settings?: SiteSettings }) {
+  const socialUrls = settings?.social
+    ?.map((link) => link.url)
+    .filter((url): url is string => Boolean(url));
+
   const data = {
     "@context": "https://schema.org",
     "@type": "HealthAndBeautyBusiness",
@@ -14,12 +18,13 @@ export function StructuredData({ settings }: { settings?: SiteSettings }) {
     url: SITE_URL,
     ...(settings?.email ? { email: settings.email } : {}),
     ...(settings?.phone ? { telephone: settings.phone } : {}),
+    ...(socialUrls?.length ? { sameAs: socialUrls } : {}),
     address: {
       "@type": "PostalAddress",
       addressLocality: "Saranda",
       addressCountry: "AL",
     },
-    areaServed: "Saranda, Albania",
+    areaServed: settings?.location || "Saranda, Albania",
     knowsAbout: "Classical Hatha Yoga",
   };
 

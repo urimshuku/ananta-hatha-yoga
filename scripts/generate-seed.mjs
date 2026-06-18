@@ -3,12 +3,15 @@
  * populated in one command. Run with: node scripts/generate-seed.mjs
  * Then import with: npm run seed
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outPath = resolve(__dirname, "../seed/seed.ndjson");
+const legalContent = JSON.parse(
+  readFileSync(resolve(__dirname, "../lib/legal-content.json"), "utf8"),
+);
 
 let keyCounter = 0;
 const key = () => `k${(keyCounter++).toString(36)}`;
@@ -20,6 +23,16 @@ function blocks(...paragraphs) {
     style: "normal",
     markDefs: [],
     children: [{ _type: "span", _key: key(), text, marks: [] }],
+  }));
+}
+
+function sectionsToBlocks(sections) {
+  return sections.map((section) => ({
+    _type: "block",
+    _key: key(),
+    style: section.type === "h2" ? "h2" : "normal",
+    markDefs: [],
+    children: [{ _type: "span", _key: key(), text: section.text, marks: [] }],
   }));
 }
 
@@ -499,34 +512,7 @@ docs.push({
   ],
 });
 
-const legal = [
-  {
-    slug: "terms-of-service",
-    title: "Terms of Service",
-    body: [
-      "These Terms of Service govern your use of the Nava Hatha Yoga website and participation in our in-person classes and programs. This is placeholder content to be reviewed and finalised before launch.",
-      "By using this website or registering for a class, you agree to engage with the practices responsibly and to follow any guidance provided by the teacher. Classes are offered in person, and registration is confirmed personally.",
-      "Please consult a qualified health professional before beginning any new practice if you have a medical condition.",
-    ],
-  },
-  {
-    slug: "privacy-policy",
-    title: "Privacy Policy",
-    body: [
-      "This Privacy Policy describes how Nava Hatha Yoga handles the information you share with us. This is placeholder content to be reviewed and finalised before launch.",
-      "When you contact us through the website, we collect only the details you provide — such as your name, email, phone number, and message — in order to respond to your enquiry. We do not sell your information.",
-      "You may request access to or deletion of your information at any time by contacting us.",
-    ],
-  },
-  {
-    slug: "cookie-policy",
-    title: "Cookie Policy",
-    body: [
-      "This Cookie Policy explains how Nava Hatha Yoga uses cookies and similar technologies. This is placeholder content to be reviewed and finalised before launch.",
-      "This website aims to use only essential cookies needed for the site to function. Any analytics or additional cookies would be described here and used only with appropriate consent.",
-    ],
-  },
-];
+const legal = Object.values(legalContent);
 
 legal.forEach((l) => {
   docs.push({
@@ -534,12 +520,12 @@ legal.forEach((l) => {
     _type: "legalPage",
     title: l.title,
     slug: { _type: "slug", current: l.slug },
-    body: blocks(...l.body),
+    body: sectionsToBlocks(l.sections),
   });
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.navahathayoga.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://navahathayoga.com";
 
 const MONTH_NAMES = [
   "January",

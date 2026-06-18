@@ -27,8 +27,8 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
   return (
     <footer className="border-t border-border bg-ivory">
       <Container className="py-section-sm">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr] md:items-stretch">
-          <div className="flex max-w-sm flex-col">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 md:items-stretch">
+          <div className="flex max-w-sm flex-col lg:col-span-1">
             <div>
               <p className="font-heading text-2xl text-charcoal">{brand}</p>
               <p className="mt-3 text-sm leading-relaxed text-brown">{tagline}</p>
@@ -83,21 +83,28 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
               </div>
             ) : null}
           </div>
+
+          <div>
+            <h2 className="eyebrow mb-4">Legal</h2>
+            <ul className="space-y-2.5 text-sm">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-charcoal/80 transition-colors hover:text-saffron"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-8 text-xs text-brown sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 border-t border-border pt-8 text-xs text-brown">
           <p>
             &copy; {year} {brand}. All rights reserved.
           </p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {LEGAL_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="hover:text-saffron">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </Container>
     </footer>

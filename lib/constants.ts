@@ -20,7 +20,7 @@ export const SITE_DESCRIPTION =
   "Nava Hatha Yoga offers Classical Hatha Yoga in Saranda, Albania — practices taught in their traditional form to support clarity, balance, and inner stability. Classes are in-person.";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.navahathayoga.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://navahathayoga.com";
 
 export const CONTACT = {
   email: "info@navahathayoga.com",
