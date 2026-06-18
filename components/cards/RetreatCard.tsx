@@ -20,17 +20,17 @@ export function RetreatCard({ retreat }: { retreat: RetreatListItem }) {
           className="h-full w-full object-cover transition-transform duration-700 ease-calm group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-4 sm:p-6">
         {retreat.date || retreat.location ? (
-          <p className="mb-2 text-xs uppercase tracking-wide text-brown">
+          <p className="mb-1.5 text-xs uppercase tracking-wide text-brown sm:mb-2">
             {[formatDate(retreat.date, { day: "numeric", month: "long", year: "numeric" }), retreat.location]
               .filter(Boolean)
               .join(" · ")}
           </p>
         ) : null}
-        <h3 className="font-heading text-2xl text-charcoal">{retreat.title}</h3>
+        <h3 className="font-heading text-xl text-charcoal sm:text-2xl">{retreat.title}</h3>
         {retreat.description ? (
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brown">
+          <p className="mt-1.5 line-clamp-3 text-sm leading-relaxed text-brown sm:mt-2">
             {retreat.description}
           </p>
         ) : null}

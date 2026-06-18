@@ -28,13 +28,13 @@ export function Header({ brandName = SITE_NAME }: { brandName?: string }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-cream/85 backdrop-blur-md">
       <nav
-        className="mx-auto flex h-20 max-w-container items-center justify-between px-6 sm:px-8"
+        className="mx-auto flex h-16 max-w-container items-center justify-between px-5 sm:h-20 sm:px-8"
         aria-label="Primary"
       >
         <Link
           href="/"
           onClick={closeMenu}
-          className="font-heading text-xl tracking-wide text-charcoal sm:text-2xl"
+          className="font-heading text-lg tracking-wide text-charcoal sm:text-2xl"
         >
           {brandName}
         </Link>
@@ -89,18 +89,18 @@ export function Header({ brandName = SITE_NAME }: { brandName?: string }) {
 
       {open ? (
         <div className="border-t border-border bg-cream lg:hidden">
-          <div className="flex flex-col gap-1 px-6 py-6">
+          <div className="flex flex-col gap-0.5 px-4 py-3">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="rounded-lg px-2 py-3 text-base font-medium text-charcoal hover:bg-sand/50"
+                className="rounded-lg px-2 py-2 text-sm font-medium text-charcoal hover:bg-sand/50"
               >
                 {link.label}
               </Link>
             ))}
-            <Button href="/events" onClick={closeMenu} className="mt-3 w-full">
+            <Button href="/events" size="sm" onClick={closeMenu} className="mt-2 w-full">
               Upcoming Events
             </Button>
           </div>

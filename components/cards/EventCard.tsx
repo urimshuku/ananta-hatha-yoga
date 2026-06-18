@@ -162,8 +162,8 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
 
   return (
     <article className="overflow-hidden rounded-xl border border-border bg-ivory shadow-soft transition-shadow duration-300 ease-calm hover:shadow-card">
-      <div className="p-6 sm:p-7">
-        <div className="flex items-start justify-between gap-4">
+      <div className="p-4 sm:p-7">
+        <div className="flex items-start justify-between gap-3 sm:gap-4">
           {locationBadge ? (
             <span className="inline-flex rounded-full bg-sand px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-brown">
               {locationBadge}
@@ -178,7 +178,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
 
           {dateBadge ? (
             <div className="shrink-0 text-right leading-none">
-              <p className="font-heading text-3xl text-gold sm:text-4xl">{dateBadge.days}</p>
+              <p className="font-heading text-2xl text-gold sm:text-4xl">{dateBadge.days}</p>
               <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-brown">
                 {dateBadge.monthYear}
               </p>
@@ -186,7 +186,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
           ) : null}
         </div>
 
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-4 flex items-center gap-2.5 sm:mt-5 sm:gap-3">
           {symbolSrc ? (
             <Image
               src={symbolSrc}
@@ -197,17 +197,17 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
               className="h-7 w-7 shrink-0 object-contain opacity-90"
             />
           ) : null}
-          <h3 className="font-heading text-2xl text-charcoal sm:text-[1.75rem]">{event.title}</h3>
+          <h3 className="font-heading text-xl text-charcoal sm:text-[1.75rem]">{event.title}</h3>
         </div>
 
         {summary ? (
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-brown sm:text-[0.95rem]">
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brown sm:mt-4 sm:text-[0.95rem]">
             {summary}
           </p>
         ) : null}
 
-        <dl className="mt-5 grid gap-6 sm:grid-cols-2 sm:gap-8">
-          <div className="space-y-3">
+        <dl className="mt-4 grid gap-4 sm:mt-5 sm:grid-cols-2 sm:gap-8">
+          <div className="space-y-2.5 sm:space-y-3">
             {event.date ? (
               <EventDetailRow icon={<IconCalendar />} label="Date">
                 {formatEventCalendarLine(event.date, event.endDate)}
@@ -240,7 +240,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
         </dl>
 
         {event.notes && event.notes.length > 0 ? (
-          <div className="mt-5 rounded-lg border border-border/70 bg-cream/60 px-4 py-3.5 sm:px-5">
+          <div className="mt-4 rounded-lg border border-border/70 bg-cream/60 px-3.5 py-3 sm:mt-5 sm:px-5 sm:py-3.5">
             <ul className="space-y-2">
               {event.notes.map((note) => (
                 <li
@@ -259,9 +259,9 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-4 border-t border-border px-6 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+      <div className="flex flex-col gap-3 border-t border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-7 sm:py-4">
         {event.priceLabel || event.paymentNote ? (
-          <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1 font-heading text-xl text-charcoal">
+          <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1 font-heading text-lg text-charcoal sm:text-xl">
             {event.priceLabel ? (
               <span className="inline-flex items-center gap-2">
                 <IconPrice />
@@ -278,7 +278,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
           <span />
         )}
 
-        <div className="flex flex-wrap gap-3 sm:justify-end">
+        <div className="flex flex-wrap gap-2 sm:gap-3 sm:justify-end">
           <Button
             href={`/register?event=${encodeURIComponent(event.title)}`}
             size="sm"

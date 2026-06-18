@@ -19,14 +19,14 @@ export function ProgramCard({ program }: { program: ProgramListItem }) {
           className="h-full w-full object-cover transition-transform duration-700 ease-calm group-hover:scale-[1.03]"
         />
       </div>
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-heading text-2xl text-charcoal">{program.title}</h3>
+      <div className="flex flex-1 flex-col p-4 sm:p-6">
+        <h3 className="font-heading text-xl text-charcoal sm:text-2xl">{program.title}</h3>
         {program.shortIntro ? (
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-brown">
+          <p className="mt-1.5 line-clamp-3 text-sm leading-relaxed text-brown sm:mt-2">
             {program.shortIntro}
           </p>
         ) : null}
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-saffron">
+        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-saffron sm:mt-4">
           Learn more
           <span aria-hidden="true" className="transition-transform duration-300 ease-calm group-hover:translate-x-1">
             &rarr;

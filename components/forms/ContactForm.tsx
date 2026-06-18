@@ -16,7 +16,7 @@ interface ContactFormProps {
 }
 
 const fieldClass =
-  "w-full rounded-lg border border-border-strong bg-ivory px-4 py-3 text-charcoal placeholder:text-brown/60 focus-visible:border-saffron focus-visible:outline-none";
+  "w-full rounded-lg border border-border-strong bg-ivory px-3.5 py-2.5 text-charcoal placeholder:text-brown/60 focus-visible:border-saffron focus-visible:outline-none sm:px-4 sm:py-3";
 const labelClass = "mb-1.5 block text-sm font-medium text-charcoal";
 
 const SENT_DISPLAY_MS = 3000;
@@ -67,7 +67,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5" noValidate>
       {/* Honeypot: hidden from users, catches bots. Keep for Netlify too. */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
         <label htmlFor="company">Company (leave blank)</label>
@@ -80,7 +80,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
         />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="fullName" className={labelClass}>
             Full name <span className="text-saffron">*</span>
@@ -109,7 +109,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="phone" className={labelClass}>
             Phone <span className="text-saffron">*</span>
@@ -137,7 +137,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="program" className={labelClass}>
             Program

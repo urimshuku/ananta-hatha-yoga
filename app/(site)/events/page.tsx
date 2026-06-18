@@ -38,7 +38,7 @@ export default async function EventsPage() {
       <Section tone="cream">
         <Container>
           {events.length > 0 ? (
-            <MotionStagger className="mx-auto flex max-w-4xl flex-col gap-6">
+            <MotionStagger className="mx-auto flex max-w-4xl flex-col gap-4 sm:gap-6">
               {events.map((event) => (
                 <MotionItem key={event._id} className="h-full">
                   <EventCard event={event} whatsappNumber={settings.whatsapp} />
@@ -54,7 +54,7 @@ export default async function EventsPage() {
             </EmptyState>
           )}
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center sm:mt-12">
             <Button href="/events/archive" variant="ghost">
               View past events &rarr;
             </Button>

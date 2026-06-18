@@ -95,19 +95,19 @@ export default async function ProgramDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <section className="bg-ivory pt-32 pb-section-sm sm:pt-40 border-b border-border">
+      <section className="border-b border-border bg-ivory pb-10 pt-10 sm:pb-section-sm sm:pt-16 md:pt-40">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <Link
               href="/programs"
-              className="mb-6 inline-flex text-sm font-medium text-brown transition-colors hover:text-saffron"
+              className="mb-4 inline-flex text-sm font-medium text-brown transition-colors hover:text-saffron sm:mb-6"
             >
               &larr; All programs
             </Link>
             <LocalProgramSymbol slug={program.slug} />
             <h1 className="text-display text-balance">{program.title}</h1>
             {program.shortIntro ? (
-              <p className="hero-subtitle mt-6">{program.shortIntro}</p>
+              <p className="hero-subtitle mt-4 sm:mt-6">{program.shortIntro}</p>
             ) : null}
           </div>
         </Container>

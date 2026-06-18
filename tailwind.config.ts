@@ -36,8 +36,8 @@ const config: Config = {
       },
       fontSize: {
         // Fluid display sizes for a spacious, premium feel
-        display: ["clamp(2.75rem, 6vw, 5rem)", { lineHeight: "1.05", letterSpacing: "-0.01em" }],
-        "display-sm": ["clamp(2.25rem, 4.5vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.005em" }],
+        display: ["clamp(2.25rem, 6vw, 5rem)", { lineHeight: "1.05", letterSpacing: "-0.01em" }],
+        "display-sm": ["clamp(1.875rem, 4.5vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.005em" }],
       },
       letterSpacing: {
         widest: "0.25em",
@@ -55,8 +55,8 @@ const config: Config = {
         prose: "42rem",
       },
       spacing: {
-        section: "clamp(4rem, 9vw, 8rem)",
-        "section-sm": "clamp(3rem, 6vw, 5rem)",
+        section: "clamp(2.75rem, 9vw, 8rem)",
+        "section-sm": "clamp(2rem, 6vw, 5rem)",
       },
       boxShadow: {
         soft: "0 1px 2px rgba(33, 28, 22, 0.04), 0 8px 24px rgba(33, 28, 22, 0.05)",

@@ -37,15 +37,15 @@ export default async function ContactPage() {
 
       <Section tone="cream">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
-            <div className="rounded-2xl border border-border bg-ivory p-6 shadow-soft sm:p-8">
-              <h2 className="mb-6 font-heading text-2xl text-charcoal">
+          <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16">
+            <div className="rounded-2xl border border-border bg-ivory p-4 shadow-soft sm:p-8">
+              <h2 className="mb-4 font-heading text-xl text-charcoal sm:mb-6 sm:text-2xl">
                 Send a message
               </h2>
               <ContactForm programs={programs.map((p) => p.title)} />
             </div>
 
-            <aside className="space-y-8">
+            <aside className="space-y-6 sm:space-y-8">
               <div>
                 <h2 className="eyebrow mb-4">Contact details</h2>
                 <ul className="space-y-3 text-charcoal/90">

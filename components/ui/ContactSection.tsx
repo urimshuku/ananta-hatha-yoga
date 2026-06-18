@@ -31,12 +31,12 @@ export function ContactSection({
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-display-sm text-balance">{heading}</h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brown">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-brown sm:mt-5 sm:text-lg">
             {description}
           </p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-border bg-ivory p-6 shadow-soft sm:p-8">
+        <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-border bg-ivory p-4 shadow-soft sm:mt-10 sm:p-8">
           <ContactForm programs={programs} />
         </div>
       </Container>

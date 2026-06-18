@@ -44,12 +44,12 @@ export default async function RetreatDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <section className="bg-ivory pt-32 pb-section-sm sm:pt-40 border-b border-border">
+      <section className="border-b border-border bg-ivory pb-10 pt-10 sm:pb-section-sm sm:pt-16 md:pt-40">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow mb-5">Retreat</p>
+            <p className="eyebrow mb-3 sm:mb-5">Retreat</p>
             <h1 className="text-display text-balance">{retreat.title}</h1>
-            {meta ? <p className="mt-5 text-brown">{meta}</p> : null}
+            {meta ? <p className="mt-4 text-brown sm:mt-5">{meta}</p> : null}
           </div>
         </Container>
       </section>

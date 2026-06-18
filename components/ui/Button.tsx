@@ -17,9 +17,9 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "px-4 py-2 text-sm",
-  default: "px-6 py-3 text-sm tracking-wide",
-  lg: "px-8 py-4 text-base tracking-wide",
+  sm: "px-3.5 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm",
+  default: "px-5 py-2.5 text-sm tracking-wide sm:px-6 sm:py-3",
+  lg: "px-6 py-3 text-sm tracking-wide sm:px-8 sm:py-4 sm:text-base",
 };
 
 interface CommonProps {

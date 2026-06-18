@@ -11,17 +11,17 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, description, children }: PageHeroProps) {
   return (
-    <section className="bg-ivory pt-32 pb-section-sm sm:pt-40 border-b border-border">
+    <section className="border-b border-border bg-ivory pb-10 pt-10 sm:pb-section-sm sm:pt-16 md:pt-40">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          {eyebrow ? <p className="eyebrow mb-5">{eyebrow}</p> : null}
+          {eyebrow ? <p className="eyebrow mb-3 sm:mb-5">{eyebrow}</p> : null}
           <h1 className="text-display text-balance">{title}</h1>
           {description ? (
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brown">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brown sm:mt-6 sm:text-lg">
               {description}
             </p>
           ) : null}
-          {children ? <div className="mt-8 flex justify-center">{children}</div> : null}
+          {children ? <div className="mt-5 flex justify-center sm:mt-8">{children}</div> : null}
         </div>
       </Container>
     </section>

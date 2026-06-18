@@ -36,7 +36,7 @@ interface RegistrationFormProps {
 }
 
 const fieldClass =
-  "w-full rounded-lg border border-border-strong bg-ivory px-4 py-3 text-charcoal placeholder:text-brown/60 focus-visible:border-saffron focus-visible:outline-none";
+  "w-full rounded-lg border border-border-strong bg-ivory px-3.5 py-2.5 text-charcoal placeholder:text-brown/60 focus-visible:border-saffron focus-visible:outline-none sm:px-4 sm:py-3";
 const labelClass = "mb-1.5 block text-sm font-medium text-charcoal";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -322,7 +322,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
     />
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="space-y-8"
+      className="space-y-6 sm:space-y-8"
       noValidate
     >
       {/* Honeypot: hidden from users, catches bots. */}
@@ -366,8 +366,8 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       {/* Step 1 — Personal Information                                     */}
       {/* ---------------------------------------------------------------- */}
       {step === 0 ? (
-        <div className="space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
+        <div className="space-y-4 sm:space-y-5">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="fullName" className={labelClass}>
                 Full name <Required />
@@ -396,7 +396,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="email" className={labelClass}>
                 Email <Required />
@@ -441,7 +441,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
             <FieldError message={errors.address} />
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             <div>
               <label htmlFor="gender" className={labelClass}>
                 Gender
@@ -493,7 +493,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
               Emergency contact
             </legend>
             <div className="space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                 <div>
                   <label htmlFor="emergencyName" className={labelClass}>
                     Full name <Required />

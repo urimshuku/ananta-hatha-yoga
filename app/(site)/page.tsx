@@ -70,7 +70,7 @@ export default async function HomePage() {
   return (
     <>
       {/* 1. Hero */}
-      <section className="relative overflow-hidden bg-cream pt-32 pb-section sm:pt-44">
+      <section className="relative overflow-hidden bg-cream pb-12 pt-10 sm:pb-section sm:pt-20 md:pt-44">
         <div
           className="pointer-events-none absolute inset-0"
           style={HERO_GLOW}
@@ -78,14 +78,14 @@ export default async function HomePage() {
         />
         <Container className="relative">
           <MotionReveal className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow mb-6">{settings.brandName}</p>
+            <p className="eyebrow mb-4 sm:mb-6">{settings.brandName}</p>
             <h1 className="text-display text-balance">
               {hero?.headline ?? "Classical Hatha Yoga"}
             </h1>
             {hero?.supportingText ? (
-              <p className="hero-subtitle mt-7">{hero.supportingText}</p>
+              <p className="hero-subtitle mt-5 sm:mt-7">{hero.supportingText}</p>
             ) : null}
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col items-center justify-center gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
               <Button href={hero?.primaryCta?.href ?? "/events"} size="lg">
                 {hero?.primaryCta?.label ?? "View Upcoming Events"}
               </Button>
@@ -98,7 +98,7 @@ export default async function HomePage() {
               </Button>
             </div>
 
-            <Ornament className="mt-14" />
+            <Ornament className="mt-8 sm:mt-14" />
           </MotionReveal>
         </Container>
       </section>
@@ -106,7 +106,7 @@ export default async function HomePage() {
       {/* 2. What is Classical Hatha Yoga? */}
       <Section tone="ivory" className="border-y border-border">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <MotionReveal>
               {home.intro?.eyebrow ? (
                 <p className="eyebrow mb-4">{home.intro.eyebrow}</p>
@@ -120,7 +120,7 @@ export default async function HomePage() {
             </MotionReveal>
           </div>
           {introVideoId ? (
-            <MotionReveal delay={0.15} className="mt-12">
+            <MotionReveal delay={0.15} className="mt-8 sm:mt-12">
               <YouTubeEmbed
                 videoId={introVideoId}
                 title={home.intro?.heading ?? DEFAULT_INTRO_HEADING}
@@ -141,14 +141,14 @@ export default async function HomePage() {
               description="Each program is a complete practice within the Classical Hatha Yoga system."
             />
           </MotionReveal>
-          <MotionStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <MotionStagger className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {featured.slice(0, 6).map((program) => (
               <MotionItem key={program._id} className="h-full">
                 <ProgramCard program={program} />
               </MotionItem>
             ))}
           </MotionStagger>
-          <div className="mt-10">
+          <div className="mt-6 sm:mt-10">
             <Button href="/programs" variant="secondary">
               View all programs
             </Button>
@@ -166,17 +166,17 @@ export default async function HomePage() {
               description="All classes are currently held in person in Saranda, Albania."
             />
           </MotionReveal>
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             {events.length > 0 ? (
               <>
-                <MotionStagger className="mx-auto flex max-w-4xl flex-col gap-6">
+                <MotionStagger className="mx-auto flex max-w-4xl flex-col gap-4 sm:gap-6">
                   {events.slice(0, 3).map((event) => (
                     <MotionItem key={event._id} className="h-full">
                       <EventCard event={event} whatsappNumber={settings.whatsapp} />
                     </MotionItem>
                   ))}
                 </MotionStagger>
-                <div className="mt-10">
+                <div className="mt-6 sm:mt-10">
                   <Button href="/events" variant="secondary">
                     See all upcoming events
                   </Button>

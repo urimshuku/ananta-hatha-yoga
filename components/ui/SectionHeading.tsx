@@ -25,10 +25,10 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
+      {eyebrow ? <p className="eyebrow mb-3 sm:mb-4">{eyebrow}</p> : null}
       <h2 className="text-display-sm text-balance">{title}</h2>
       {description ? (
-        <p className="mt-5 text-lg leading-relaxed text-brown">{description}</p>
+        <p className="mt-3 text-base leading-relaxed text-brown sm:mt-5 sm:text-lg">{description}</p>
       ) : null}
     </div>
   );
