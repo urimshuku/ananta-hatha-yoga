@@ -53,6 +53,22 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
           </div>
 
           <div>
+            <h2 className="eyebrow mb-4">Legal</h2>
+            <ul className="space-y-2.5 text-sm">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-charcoal/80 transition-colors hover:text-saffron"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
             <h2 className="eyebrow mb-4">Contact</h2>
             <ul className="space-y-2.5 text-sm text-charcoal/80">
               {email ? (
@@ -82,22 +98,6 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
                 </Button>
               </div>
             ) : null}
-          </div>
-
-          <div>
-            <h2 className="eyebrow mb-4">Legal</h2>
-            <ul className="space-y-2.5 text-sm">
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-charcoal/80 transition-colors hover:text-saffron"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
