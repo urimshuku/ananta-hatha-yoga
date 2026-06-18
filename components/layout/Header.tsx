@@ -100,7 +100,7 @@ export function Header({ brandName = SITE_NAME }: { brandName?: string }) {
                 {link.label}
               </Link>
             ))}
-            <Button href="/events" size="sm" onClick={closeMenu} className="mt-2 w-full">
+            <Button href="/events" size="sm" onClick={closeMenu} className="mt-2 w-fit self-start">
               Upcoming Events
             </Button>
           </div>
