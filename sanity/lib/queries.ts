@@ -94,7 +94,7 @@ export const programBySlugQuery = groq`
 `;
 
 export const upcomingEventsQuery = groq`
-  *[_type == "event" && published == true && dateTime(date) >= dateTime(now())]
+  *[_type == "event" && published == true && dateTime(coalesce(endDate, date)) >= dateTime(now())]
     | order(date asc){
     _id,
     title,
@@ -118,7 +118,7 @@ export const upcomingEventsQuery = groq`
 
 export const upcomingEventsByProgramQuery = groq`
   *[_type == "event" && published == true
-    && dateTime(date) >= dateTime(now())
+    && dateTime(coalesce(endDate, date)) >= dateTime(now())
     && relatedProgram->slug.current == $slug]
     | order(date asc){
     _id,
@@ -142,7 +142,7 @@ export const upcomingEventsByProgramQuery = groq`
 `;
 
 export const pastEventsQuery = groq`
-  *[_type == "event" && published == true && dateTime(date) < dateTime(now())]
+  *[_type == "event" && published == true && dateTime(coalesce(endDate, date)) < dateTime(now())]
     | order(date desc){
     _id,
     title,

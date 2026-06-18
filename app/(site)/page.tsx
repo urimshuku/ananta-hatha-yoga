@@ -29,6 +29,8 @@ const HERO_GLOW = {
 
 const DEFAULT_INTRO_HEADING = "What is Classical Hatha Yoga?";
 
+export const revalidate = 60;
+
 function IntroHeading({ heading }: { heading?: string }) {
   const text = heading ?? DEFAULT_INTRO_HEADING;
   const breakAt = text.indexOf("Hatha Yoga");

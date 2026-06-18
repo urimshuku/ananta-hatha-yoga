@@ -39,6 +39,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 60;
+
 function ProgramSection({
   title,
   children,

@@ -18,6 +18,8 @@ export const metadata: Metadata = buildMetadata({
   path: "/events",
 });
 
+export const revalidate = 60;
+
 export default async function EventsPage() {
   const [events, settings, programs] = await Promise.all([
     getUpcomingEvents(),
