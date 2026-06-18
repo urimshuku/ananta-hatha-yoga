@@ -49,6 +49,7 @@ import {
   GUIDELINES_PDF_URL,
 } from "@/lib/guidelines-pdf.constants";
 import { cn } from "@/lib/utils";
+import { apiUrl } from "@/lib/api-url";
 
 interface RegistrationFormProps {
   event?: string;
@@ -282,7 +283,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
     };
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch(apiUrl("/api/register"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

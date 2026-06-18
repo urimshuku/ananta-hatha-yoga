@@ -595,6 +595,16 @@ const scheduledEvents = [
     startDay: 27,
     endDay: 29,
     ageRequirement: "14+",
+    priceLabel: "170€",
+    schedule: {
+      durationLabel: "3 sessions / 2 hours",
+      sessionCount: 3,
+      sessionLines: [
+        "27 June: 5.30 pm – 7.30 pm",
+        "28 June: 5.30 pm – 7.30 pm",
+        "29 June: 5.30 pm – 7.30 pm",
+      ],
+    },
   },
   {
     id: "surya-kriya-jul-2026-1",

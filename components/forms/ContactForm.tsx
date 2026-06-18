@@ -11,6 +11,7 @@ import {
   formLabelClass,
 } from "@/components/forms/form-styles";
 import { cn } from "@/lib/utils";
+import { apiUrl } from "@/lib/api-url";
 
 /**
  * Posts JSON to /api/contact, which is host-agnostic (works on Vercel, Netlify,
@@ -47,7 +48,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(apiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
