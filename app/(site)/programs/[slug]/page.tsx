@@ -14,7 +14,7 @@ import { LocalProgramImage } from "@/components/ui/LocalProgramImage";
 import { LocalProgramSymbol } from "@/components/ui/LocalProgramSymbol";
 import { Ornament } from "@/components/ui/Ornament";
 import { buildMetadata } from "@/lib/seo";
-import { ensureTrailingPeriod, cn } from "@/lib/utils";
+import { ensureTrailingPeriod } from "@/lib/utils";
 import {
   PROGRAM_AFTER_PROGRAM_TITLE,
   PROGRAM_MEDICAL_NOTICE,
@@ -27,7 +27,6 @@ import {
   programAfterProgramText,
   programSidebarCtaText,
 } from "@/lib/constants";
-import { programSidebarImageAspectClass } from "@/lib/local-images";
 import {
   getProgramBySlug,
   getProgramSlugs,
@@ -186,11 +185,12 @@ export default async function ProgramDetailPage({ params }: PageProps) {
 
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="overflow-hidden rounded-xl border border-border bg-ivory shadow-soft">
-                <div className={cn("relative", programSidebarImageAspectClass(program.slug))}>
+                <div className="overflow-hidden">
                   <LocalProgramImage
                     slug={program.slug}
                     alt={program.title}
                     sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="h-auto w-full"
                   />
                 </div>
                 {program.videoUrl && videoLink ? (
