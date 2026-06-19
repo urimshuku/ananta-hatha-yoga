@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -34,9 +35,21 @@ export function Header({ brandName = SITE_NAME }: { brandName?: string }) {
         <Link
           href="/"
           onClick={closeMenu}
-          className="font-heading text-lg tracking-wide text-charcoal sm:text-2xl"
+          className="flex shrink-0 items-center gap-1.5 transition-opacity hover:opacity-90 sm:gap-2"
+          aria-label={`${brandName} home`}
         >
-          {brandName}
+          <BrandLogo
+            variant="symbol"
+            decorative
+            priority
+            className="h-12 w-12 sm:h-16 sm:w-16"
+          />
+          <BrandLogo
+            variant="wordmark"
+            decorative
+            priority
+            className="h-6 w-auto max-w-[84px] sm:h-7 sm:max-w-[108px]"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

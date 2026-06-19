@@ -6,6 +6,38 @@
 
 export const SITE_NAME = "Nava Hatha Yoga";
 export const SITE_TAGLINE = "In balance, life unfolds.";
+
+/** Horizontal brand logo (with wordmark). */
+export const BRAND_LOGO = {
+  src: "/images/nava-hatha-yoga-logo.png",
+  alt: "Nava Hatha Yoga",
+  width: 1024,
+  height: 731,
+} as const;
+
+/** Symbol-only brand mark (header). */
+export const BRAND_LOGO_SYMBOL = {
+  src: "/images/nava-logo-symbol.png",
+  alt: "Nava Hatha Yoga",
+  width: 1024,
+  height: 1024,
+} as const;
+
+/** Text wordmark (header, beside symbol). */
+export const BRAND_LOGO_WORDMARK = {
+  src: "/images/nava-hatha-yoga-wordmark.png",
+  alt: "Nava Hatha Yoga",
+  width: 1024,
+  height: 323,
+} as const;
+
+/** Full vertical brand logo (footer). */
+export const BRAND_LOGO_FULL = {
+  src: "/images/nava-hatha-yoga-logo-full.png",
+  alt: "Nava Hatha Yoga",
+  width: 1024,
+  height: 1024,
+} as const;
 export const ABOUT_PAGE_HERO_TITLE =
   "Classical Hatha Yoga, taught with care.";
 
