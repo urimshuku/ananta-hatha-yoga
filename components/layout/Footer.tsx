@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { FooterCertificationLogo } from "@/components/layout/FooterCertificationLogo";
-import { BrandLogo } from "@/components/layout/BrandLogo";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import {
@@ -31,13 +30,7 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 md:items-stretch">
           <div className="flex max-w-sm flex-col lg:col-span-1">
             <div>
-              <Link href="/" className="inline-block transition-opacity hover:opacity-90">
-                <BrandLogo
-                  alt={brand}
-                  variant="full"
-                  className="w-full max-w-[140px] sm:max-w-[160px]"
-                />
-              </Link>
+              <p className="font-heading text-2xl text-charcoal">{brand}</p>
               <p className="mt-3 text-sm leading-relaxed text-brown">{tagline}</p>
             </div>
             <FooterCertificationLogo className="mt-8 md:mt-auto md:pt-10" />
