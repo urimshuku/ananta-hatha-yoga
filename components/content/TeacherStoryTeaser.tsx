@@ -25,7 +25,7 @@ export function TeacherStoryTeaser() {
             alt={TEACHER_PHOTO_ALT}
             fill
             sizes="256px"
-            className="object-cover object-[center_18%]"
+            className="object-cover object-[center_58%]"
           />
         </div>
 

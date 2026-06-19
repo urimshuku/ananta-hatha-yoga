@@ -50,6 +50,7 @@ export function programSymbolSrc(slug: string): string | null {
 const ABOUT_SECTION_IMAGE_OBJECT_POSITION: Partial<Record<string, string>> = {
   "isha-yoga-center": "object-[35%_center]",
   sadhguru: "object-[center_20%]",
+  "teacher-linda": "object-[center_58%]",
 };
 
 export function aboutSectionImageSrc(key: string): string | null {
