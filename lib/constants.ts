@@ -170,6 +170,9 @@ export function getProgramVideoLink(slug: string, programTitle: string) {
 
 export const PROGRAM_DEFAULT_PRICE_LABEL = "Contact for details";
 
+/** Set to true to show price in the program detail sidebar. */
+export const SHOW_PROGRAM_SIDEBAR_PRICE = false;
+
 export const MAIN_PROGRAM_SLUGS = [
   "surya-kriya",
   "surya-shakti",

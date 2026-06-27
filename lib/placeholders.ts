@@ -590,7 +590,7 @@ const scheduledEvents: ScheduledEvent[] = [
     startDay: 24,
     endDay: 26,
     ageRequirement: "14+",
-    priceLabel: "170€",
+    priceLabel: "150€",
     location: tiranaEventLocation,
   },
   {
