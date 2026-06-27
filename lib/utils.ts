@@ -195,6 +195,76 @@ export function eventLocationBadge(location?: string | null): string {
   return (parts[parts.length - 1] ?? location).toUpperCase();
 }
 
+/** Short city label for registration emails (e.g. Saranda, Tiranë). */
+export function eventLocationShort(location?: string | null): string {
+  if (!location) return "";
+
+  if (/saranda/i.test(location)) return "Saranda";
+  if (/tiran/i.test(location)) return "Tiranë";
+
+  const parts = location
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => part && !/^\d+$/.test(part) && !/^[A-Z0-9+]+$/i.test(part));
+
+  if (parts.length >= 2) {
+    return parts[parts.length - 2];
+  }
+
+  return parts[parts.length - 1] ?? location;
+}
+
+/** Compact date range for registration (e.g. 29-30 June). */
+export function formatRegistrationEventDates(
+  startString?: string | null,
+  endString?: string | null,
+): string {
+  const start = startString ? parseEventDate(startString) : null;
+  if (!start) return "";
+
+  const end = endString ? parseEventDate(endString) : null;
+  const monthName = (date: Date) =>
+    new Intl.DateTimeFormat("en-GB", {
+      month: "long",
+      timeZone: EVENT_TIMEZONE,
+    }).format(date);
+  const day = (date: Date) =>
+    new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      timeZone: EVENT_TIMEZONE,
+    }).format(date);
+
+  if (end && end.getTime() > start.getTime()) {
+    const sameMonth =
+      start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear();
+
+    if (sameMonth) {
+      return `${day(start)}-${day(end)} ${monthName(start)}`;
+    }
+
+    return `${day(start)} ${monthName(start)} - ${day(end)} ${monthName(end)}`;
+  }
+
+  return `${day(start)} ${monthName(start)}`;
+}
+
+/** Full event label for registration links and notification emails. */
+export function formatRegistrationEventLabel(event: {
+  title: string;
+  location?: string | null;
+  date?: string | null;
+  endDate?: string | null;
+}): string {
+  const title = event.title.trim();
+  const location = eventLocationShort(event.location);
+  const dates = formatRegistrationEventDates(event.date, event.endDate);
+
+  if (location && dates) return `${title}, ${location} (${dates})`;
+  if (location) return `${title}, ${location}`;
+  if (dates) return `${title} (${dates})`;
+  return title;
+}
+
 /** Short card copy: intro only, capped at a few sentences. */
 export function eventCardSummary(description?: string | null, maxSentences = 3): string {
   if (!description) return "";

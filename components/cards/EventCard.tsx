@@ -9,6 +9,7 @@ import {
   eventLocationBadge,
   formatEventCalendarLine,
   formatEventDateBadge,
+  formatRegistrationEventLabel,
   formatSessionTimingsTo24Hour,
 } from "@/lib/utils";
 import type { YogaEvent } from "@/sanity/lib/types";
@@ -180,6 +181,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
   const dateBadge = formatEventDateBadge(event.date, event.endDate);
   const locationBadge = eventLocationBadge(event.location);
   const summary = eventCardSummary(event.description);
+  const registrationEvent = formatRegistrationEventLabel(event);
   const programSlug = event.relatedProgram?.slug;
   const symbolSrc = programSlug ? programSymbolSrc(programSlug) : null;
 
@@ -303,7 +305,7 @@ export function EventCard({ event, whatsappNumber }: EventCardProps) {
 
         <div className="flex flex-wrap gap-2 sm:gap-3 sm:justify-end">
           <Button
-            href={`/register?event=${encodeURIComponent(event.title)}`}
+            href={`/register?event=${encodeURIComponent(registrationEvent)}`}
             size="sm"
           >
             Register

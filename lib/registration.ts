@@ -9,7 +9,7 @@ import { sendFormNotification } from "@/lib/form-email";
  */
 
 export interface RegistrationSubmission {
-  /** Event the person is registering for (from the ?event= query param). */
+  /** Program, location, and dates (from the ?event= query param). */
   event?: string;
 
   // Step 1 — Personal Information
