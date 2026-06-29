@@ -317,9 +317,10 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       <div className="space-y-5 py-3 text-center font-heading sm:space-y-8 sm:py-4">
         <h2 className="text-2xl text-charcoal sm:text-4xl">Thank you!</h2>
         <div className="mx-auto max-w-md space-y-4 text-base leading-relaxed text-brown sm:space-y-6 sm:text-lg">
+          <p>Payment details will be shared with you shortly.</p>
           <p>
-            I look forward to welcoming you to the program and supporting you in establishing
-            a practice that can stay with you for a lifetime.
+            Meanwhile, I look forward to welcoming you to the program and supporting you in
+            establishing a practice that can stay with you for a lifetime.
           </p>
           <div className="space-y-1">
             <p>Pranam,</p>

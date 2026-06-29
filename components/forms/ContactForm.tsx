@@ -170,6 +170,7 @@ export function ContactForm({ programs = [] }: ContactFormProps) {
           </label>
           <select id="interest" name="interest" className={fieldClass} defaultValue="">
             <option value="">Select an interest (optional)</option>
+            <option value="Online Session">Online Session</option>
             <option value="One-on-One Session">One-on-One Session</option>
             <option value="Small-Group Session">Small-Group Session</option>
             <option value="Corporate session">Corporate session</option>
