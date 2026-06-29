@@ -22,7 +22,7 @@
     {
       "binding": "DB",
       "database_name": "nava-hatha-yoga-forms",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "854ccf09-a56c-4b5a-97de-28bb6e3deaeb",
       "migrations_dir": "migrations"
     }
   ],
