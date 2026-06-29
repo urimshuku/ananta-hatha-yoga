@@ -22,6 +22,7 @@ import {
   getBeforeProgramTitle,
   getProgramPriceLabel,
   getProgramVideoLink,
+  getProgramVideoUrl,
   programWhatIsSectionTitle,
   programAfterProgramText,
   programSidebarCtaText,
@@ -89,7 +90,8 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     getUpcomingEventsByProgram(program.slug),
   ]);
 
-  const videoLink = program.videoUrl ? getProgramVideoLink(program.slug, program.title) : null;
+  const videoUrl = getProgramVideoUrl(program.slug, program.videoUrl);
+  const videoLink = videoUrl ? getProgramVideoLink(program.slug, program.title) : null;
   const priceLabel = SHOW_PROGRAM_SIDEBAR_PRICE
     ? getProgramPriceLabel(program.slug, program.priceLabel)
     : null;
@@ -195,9 +197,9 @@ export default async function ProgramDetailPage({ params }: PageProps) {
                     className="h-auto w-full"
                   />
                 </div>
-                {program.videoUrl && videoLink ? (
+                {videoUrl && videoLink ? (
                   <ProgramWatchButton
-                    href={program.videoUrl}
+                    href={videoUrl}
                     ariaLabel={`Watch: ${videoLink.title}`}
                   />
                 ) : null}

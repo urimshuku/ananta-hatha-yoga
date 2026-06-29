@@ -271,6 +271,7 @@ export const programSeeds: ProgramSeed[] = [
     title: "Surya Shakti",
     slug: "surya-shakti",
     priceLabel: "95€",
+    videoUrl: "https://www.youtube.com/watch?v=OBds5NZ4PRs",
     shortIntro:
       "\"Surya\" means \"Sun,\" and \"Shakti\" means \"energy\". Surya Shakti is a dynamic form of the Sun Salutation which is an ancient yogic practice with a powerful sequence of 18 postures.",
     whatIs: [

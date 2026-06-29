@@ -160,6 +160,15 @@ const PROGRAM_VIDEO_LINKS: Record<string, { title: string }> = {
   },
 };
 
+/** Used when a program has no videoUrl in Sanity yet. */
+export const PROGRAM_VIDEO_URL_FALLBACKS: Record<string, string> = {
+  "surya-shakti": "https://www.youtube.com/watch?v=OBds5NZ4PRs",
+};
+
+export function getProgramVideoUrl(slug: string, videoUrl?: string): string | undefined {
+  return videoUrl ?? PROGRAM_VIDEO_URL_FALLBACKS[slug];
+}
+
 export function getProgramVideoLink(slug: string, programTitle: string) {
   return (
     PROGRAM_VIDEO_LINKS[slug] ?? {
