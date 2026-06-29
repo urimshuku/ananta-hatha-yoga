@@ -1,4 +1,4 @@
-import { persistAndNotify } from "@/lib/form-delivery";
+import { acceptSubmission } from "@/lib/form-delivery";
 
 /**
  * Central contact-submission module.
@@ -38,7 +38,7 @@ export function formatSubmission(s: ContactSubmission): string {
 export async function deliverSubmission(submission: ContactSubmission): Promise<void> {
   const fullName = submission.fullName.replace(/\s+/g, " ").trim();
 
-  await persistAndNotify({
+  await acceptSubmission({
     type: "contact",
     subject: `New enquiry from ${fullName}`,
     replyTo: submission.email,

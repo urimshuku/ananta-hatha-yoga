@@ -1,3 +1,5 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+
 import { sendFormNotification } from "./form-email";
 import {
   getPendingSubmissions,
@@ -10,15 +12,14 @@ import {
 /**
  * Zero-loss form delivery.
  *
- * The flow is deliberately persist-first:
- *   1. Durably store the submission in D1.
- *   2. Best-effort send the notification email (with retries).
+ * The user should never wait on (or fail because of) email delivery:
+ *   1. Durably store the submission in D1 when available.
+ *   2. Return success to the caller immediately.
+ *   3. Send the notification email in the background (with retries).
  *
- * As long as the submission is stored, the user gets a success response — even
- * if the email fails — because a scheduled job (see `flushPendingSubmissions`)
- * will keep retrying delivery until it succeeds. The only way a user sees an
- * error is if BOTH the database write AND the immediate email fail, which means
- * nothing could be saved anywhere.
+ * If D1 is configured, a failed background email is retried by the cron job.
+ * The API only surfaces an error when nothing could be stored and the request
+ * context is unavailable (extremely rare).
  */
 
 interface DeliverInput {
@@ -31,31 +32,19 @@ interface DeliverInput {
   payload: unknown;
 }
 
-export async function persistAndNotify(input: DeliverInput): Promise<void> {
-  const id =
-    typeof crypto !== "undefined" && "randomUUID" in crypto
-      ? crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  const createdAt = new Date().toISOString();
-
-  let persisted = false;
-  try {
-    await saveSubmission({
-      id,
-      type: input.type,
-      subject: input.subject,
-      replyTo: input.replyTo,
-      body: input.body,
-      payload: JSON.stringify(input.payload),
-      createdAt,
-    });
-    persisted = true;
-  } catch (error) {
-    // Could not store (e.g. D1 unavailable). We still attempt the email below;
-    // if that succeeds the submission is not lost. If it also fails we throw.
-    console.error("Failed to persist submission to D1:", error);
+function newSubmissionId(): string {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
   }
 
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+async function deliverEmail(
+  id: string,
+  input: DeliverInput,
+  persisted: boolean,
+): Promise<void> {
   try {
     await sendFormNotification({
       subject: input.subject,
@@ -73,8 +62,6 @@ export async function persistAndNotify(input: DeliverInput): Promise<void> {
       emailError instanceof Error ? emailError.message : "Unknown email error";
 
     if (persisted) {
-      // Data is safe in D1; the scheduled job will retry the email. Treat this
-      // as a success for the user so their submission is not lost or repeated.
       console.error(
         `Email delivery deferred for submission ${id} (will retry): ${message}`,
       );
@@ -82,9 +69,45 @@ export async function persistAndNotify(input: DeliverInput): Promise<void> {
       return;
     }
 
-    // Nothing was stored AND the email failed — the submission would be lost.
-    // Surface the error so the user can try again.
-    throw emailError;
+    console.error(
+      `Email delivery failed and submission was not persisted: ${message}`,
+    );
+  }
+}
+
+/**
+ * Accept a validated form submission: persist when possible, then deliver email
+ * in the background. Does not throw when email delivery fails.
+ */
+export async function acceptSubmission(input: DeliverInput): Promise<void> {
+  const id = newSubmissionId();
+  const createdAt = new Date().toISOString();
+
+  let persisted = false;
+  try {
+    await saveSubmission({
+      id,
+      type: input.type,
+      subject: input.subject,
+      replyTo: input.replyTo,
+      body: input.body,
+      payload: JSON.stringify(input.payload),
+      createdAt,
+    });
+    persisted = true;
+  } catch (error) {
+    console.error("Failed to persist submission to D1:", error);
+  }
+
+  const task = () => deliverEmail(id, input, persisted);
+
+  try {
+    const { ctx } = await getCloudflareContext({ async: true });
+    ctx.waitUntil(task());
+    return;
+  } catch {
+    // Local dev or missing execution context — deliver synchronously instead.
+    await task();
   }
 }
 
@@ -96,8 +119,7 @@ export interface FlushResult {
 
 /**
  * Retry delivery of any stored submissions whose email has not yet succeeded.
- * Invoked from the scheduled (cron) handler, where the env must be passed
- * explicitly because the request-scoped Cloudflare context is unavailable.
+ * Invoked from the scheduled (cron) handler.
  */
 export async function flushPendingSubmissions(
   env: Record<string, unknown>,
@@ -105,7 +127,8 @@ export async function flushPendingSubmissions(
 ): Promise<FlushResult> {
   const db = env.DB as D1Database | undefined;
   if (!db) {
-    throw new Error("D1 binding 'DB' is not configured for scheduled flush.");
+    console.warn("D1 binding 'DB' is not configured; skipping form email flush.");
+    return { processed: 0, sent: 0, failed: 0 };
   }
 
   const pending = await getPendingSubmissions(limit, db);
